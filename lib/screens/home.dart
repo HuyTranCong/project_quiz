@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:project_quizz/main.dart';
 import 'package:project_quizz/users/signin_screen.dart';
 // import 'package:rive/rive.dart' as Rive;
 
@@ -12,27 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  @override
-  void initState() {
-    super.initState();
-    //Lock Device Orientation
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitUp,
-    //   DeviceOrientation.portraitDown,
-    // ]);
-    //End Lock Device Orientation
-  }
-
-  @override
-  void dispose() {
-    //Lock Device Orientation
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.landscapeRight,
-    //   DeviceOrientation.landscapeLeft,
-    // ]);
-    //End Lock Device Orientation
-    super.dispose();
-  }
+  bool isTapped = false;
 
   final user = FirebaseAuth.instance.currentUser!;
   String? name;
@@ -40,10 +20,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Future getId() async {
     await FirebaseFirestore.instance
         .collection('users')
-        .where('email', isEqualTo: user.email)
+        .where('email', isEqualTo: user.email!)
         .get()
         .then((snapshot) => snapshot.docs.forEach((document) {
-              final r = document.data() as Map<String, dynamic>;
+              final r = document.data();
               try {
                 setState(() {
                   name = r['username'];
@@ -54,8 +34,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               }
             }));
   }
-
-  bool isTapped = false;
 
   @override
   Widget build(BuildContext context) {
@@ -188,12 +166,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ],
           ),
           Text(user.email!),
-          Text(user.email!),
-          Text(user.email!),
-          Text(user.email!),
+
+          //logout
           ElevatedButton.icon(
             icon: const Icon(Icons.arrow_back_outlined),
-            // onPressed: () => FirebaseAuth.instance.signOut(),
             onPressed: () {
               showDialog(
                 context: context,
@@ -206,7 +182,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         child: const Text('Đăng Xuất'),
                         onPressed: () {
                           FirebaseAuth.instance.signOut();
-                          Navigator.of(context).pop();
+                          //Navigator.of(context).pop();
+                          navigatorKey.currentState?.push(
+                            MaterialPageRoute(
+                                builder: (_) => SignInScreen(
+                                      onClickedSignUp: () {},
+                                    )),
+                          );
                         },
                       ),
                       ElevatedButton(

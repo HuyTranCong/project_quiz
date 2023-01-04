@@ -4,7 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project_quizz/main.dart';
-import 'package:project_quizz/screens/second_page.dart';
+import 'package:project_quizz/screens/onboarding.dart';
+import 'package:project_quizz/screens/page_welcome.dart';
 // import 'package:rive/rive.dart' as Rive;
 
 import '../components/utils.dart';
@@ -173,6 +174,7 @@ class _SignInScreenState extends State<SignInScreen>
                             ),
                           ),
 
+                          //forgotten password and create a accout
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -187,7 +189,7 @@ class _SignInScreenState extends State<SignInScreen>
                                 child: RichText(
                                   text: TextSpan(
                                     text: 'Quên mật khẩu?',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Color(0xFFA9DED8),
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -203,7 +205,6 @@ class _SignInScreenState extends State<SignInScreen>
                                   ),
                                 ),
                               ),
-
                               SizedBox(width: _width / 30),
 
                               //create a new account
@@ -256,6 +257,7 @@ class _SignInScreenState extends State<SignInScreen>
                               ),
                             ),
                           ),
+                          //xử lý
                           Center(
                             child: Transform.scale(
                               scale: _animation.value,
@@ -298,24 +300,7 @@ class _SignInScreenState extends State<SignInScreen>
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => Center(
-        //child: CircularProgressIndicator(),
-        child: OpenContainer(
-          closedBuilder: (_, OpenContainer) {
-            return const Center(
-              child: Text('Chào mừng bạn!'),
-            );
-          },
-          openColor: Colors.white,
-          closedShape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          transitionDuration: Duration(milliseconds: 700),
-          openBuilder: (_, closeContainer) {
-            return SecondPage();
-          },
-        ),
-      ),
+      builder: (context) => Center(child: CircularProgressIndicator()),
     );
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(

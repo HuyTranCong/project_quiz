@@ -4,14 +4,14 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:project_quizz/screens/home.dart';
 
-class SecondPage extends StatefulWidget {
-  const SecondPage({super.key});
+class PageWelcome extends StatefulWidget {
+  const PageWelcome({super.key});
 
   @override
-  State<SecondPage> createState() => _SecondPageState();
+  State<PageWelcome> createState() => _PageWelcomeState();
 }
 
-class _SecondPageState extends State<SecondPage> {
+class _PageWelcomeState extends State<PageWelcome> {
   bool _a = false;
   bool _b = false;
   bool _c = false;
@@ -67,10 +67,7 @@ class _SecondPageState extends State<SecondPage> {
       if (mounted) {
         setState(() {
           Navigator.of(context).pushReplacement(
-            ThisIsFadeRoute(
-              route: HomeScreen(),
-              page: HomeScreen(),
-            ),
+            ThisIsFadeRoute(route: HomeScreen()),
           );
         });
       }
@@ -118,6 +115,11 @@ class _SecondPageState extends State<SecondPage> {
               height: _d
                   ? _height
                   : _c
+                      ? 80
+                      : 20,
+              width: _d
+                  ? _width
+                  : _c
                       ? 200
                       : 20,
               decoration: BoxDecoration(
@@ -131,8 +133,8 @@ class _SecondPageState extends State<SecondPage> {
                         totalRepeatCount: 1,
                         animatedTexts: [
                           FadeAnimatedText(
-                            'CBSCDY',
-                            duration: const Duration(milliseconds: 1000),
+                            'OVAKE',
+                            duration: const Duration(milliseconds: 1700),
                             textStyle: const TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.w700,
@@ -151,10 +153,12 @@ class _SecondPageState extends State<SecondPage> {
 }
 
 class ThisIsFadeRoute extends PageRouteBuilder {
-  final Widget page;
-  final Widget route;
+  // final Widget page;
+  // final Widget route;
+  var page;
+  var route;
 
-  ThisIsFadeRoute({required this.page, required this.route})
+  ThisIsFadeRoute({this.page, this.route})
       : super(
           pageBuilder: (
             BuildContext context,

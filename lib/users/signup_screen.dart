@@ -371,9 +371,7 @@ class _SignUpScreenState extends State<SignUpScreen>
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => Center(
-        child: CircularProgressIndicator(),
-      ),
+      builder: (context) => Center(child: CircularProgressIndicator()),
     );
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(

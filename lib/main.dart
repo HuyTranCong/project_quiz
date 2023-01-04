@@ -1,4 +1,3 @@
-import 'package:animations/animations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:project_quizz/components/auth_page.dart';
 import 'package:project_quizz/components/utils.dart';
 import 'package:project_quizz/screens/home.dart';
-import 'package:project_quizz/screens/second_page.dart';
+import 'package:project_quizz/screens/onboarding.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: StreamBuilder(
+        body: StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -54,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
         } else if (snapshot.hasError) {
           return Center(child: Text('Có lỗi xảy ra!'));
         } else if (snapshot.hasData) {
-          return HomeScreen();
+          return OnBoardingScreen();
         } else {
           return AuthPage();
         }
