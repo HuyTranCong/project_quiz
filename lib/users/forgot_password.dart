@@ -1,8 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 // import 'package:rive/rive.dart' as Rive;
 
 import '../components/utils.dart';
@@ -26,12 +24,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
   @override
   void initState() {
     super.initState();
-    //Lock Device Orientation
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitUp,
-    //   DeviceOrientation.portraitDown,
-    // ]);
-    //End Lock Device Orientation
 
     _controller =
         AnimationController(vsync: this, duration: Duration(seconds: 2));
@@ -52,13 +44,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
 
   @override
   void dispose() {
-    //Lock Device Orientation
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.landscapeRight,
-    //   DeviceOrientation.landscapeLeft,
-    // ]);
-    //End Lock Device Orientation
-
     emailController.dispose();
     _controller.dispose();
     super.dispose();
@@ -76,9 +61,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
       backgroundColor: Color(0xFF292C31),
       body: Stack(
         children: [
-          // Positioned.fill(
-          //     child: Rive.RiveAnimation.asset(
-          //         "assets/rive_assets/lionel_animation.riv")),
           ScrollConfiguration(
             behavior: MyBehavior(),
             child: SingleChildScrollView(

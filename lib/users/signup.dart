@@ -377,10 +377,10 @@ class _SignUpScreenState extends State<SignUpScreen>
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
-      addUserDetails(
-        usernameController.text.trim(),
-        emailController.text.trim(),
-      );
+      // addUserDetails(
+      //   usernameController.text.trim(),
+      //   emailController.text.trim(),
+      // );
     } on FirebaseAuthException catch (e) {
       print(e);
 
@@ -389,17 +389,17 @@ class _SignUpScreenState extends State<SignUpScreen>
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
-  Future addUserDetails(String username, String email) async {
-    final user = FirebaseAuth.instance.currentUser!;
-    await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-      'username': username,
-      'email': email,
-      'imageUrl': null,
-      'score': 0,
-      'exp': 1,
-      'date': Timestamp.now(),
-    });
-  }
+  // Future addUserDetails(String username, String email) async {
+  //   final user = FirebaseAuth.instance.currentUser!;
+  //   await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+  //     'username': username,
+  //     'email': email,
+  //     'imageUrl': null,
+  //     'score': 0,
+  //     'exp': 1,
+  //     'date': Timestamp.now(),
+  //   });
+  // }
 }
 
 class MyBehavior extends ScrollBehavior {

@@ -5,11 +5,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project_quizz/main.dart';
 import 'package:project_quizz/screens/onboarding.dart';
-import 'package:project_quizz/screens/page_welcome.dart';
+import 'package:project_quizz/screens/welcome_page.dart';
+import 'package:project_quizz/users/signup.dart';
 // import 'package:rive/rive.dart' as Rive;
 
 import '../components/utils.dart';
-import 'forgot_password_screen.dart';
+import 'forgot_password.dart';
 
 class SignInScreen extends StatefulWidget {
   final VoidCallback onClickedSignUp;
@@ -322,37 +323,3 @@ class MyBehavior extends ScrollBehavior {
     return child;
   }
 }
-
-//component1 - textfield
-// Widget component1(
-//     IconData icon, String hintText, bool isPassword, bool isEmail) {
-//   double _width = MediaQuery.of(context).size.width;
-//   return Container(
-//     height: _width / 8,
-//     width: _width / 1.22,
-//     alignment: Alignment.center,
-//     padding: EdgeInsets.only(right: _width / 30),
-//     decoration: BoxDecoration(
-//       color: Color(0xFF212428),
-//       borderRadius: BorderRadius.circular(15),
-//     ),
-//     child: TextField(
-//       style: TextStyle(color: Colors.white.withOpacity(.9)),
-//       obscureText: isPassword,
-//       keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
-//       decoration: InputDecoration(
-//         prefixIcon: Icon(
-//           icon,
-//           color: Colors.white.withOpacity(.7),
-//         ),
-//         border: InputBorder.none,
-//         hintMaxLines: 1,
-//         hintText: hintText,
-//         hintStyle: TextStyle(
-//           fontSize: 14,
-//           color: Colors.white.withOpacity(.5),
-//         ),
-//       ),
-//     ),
-//   );
-// }

@@ -1,6 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:project_quizz/screens/page_welcome.dart';
+import 'package:project_quizz/screens/welcome_page.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -24,7 +24,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
           transitionDuration: Duration(milliseconds: 700),
           openBuilder: (_, closeContainer) {
-            return PageWelcome();
+            return WelcomePage();
           },
         ),
       ),

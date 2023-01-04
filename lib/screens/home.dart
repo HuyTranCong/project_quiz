@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:project_quizz/main.dart';
-import 'package:project_quizz/users/signin_screen.dart';
+import 'package:project_quizz/users/signin.dart';
 // import 'package:rive/rive.dart' as Rive;
 
 class HomeScreen extends StatefulWidget {
@@ -23,40 +23,40 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final user = FirebaseAuth.instance.currentUser!;
   String? name;
   int exp = 1;
-  Future getId() async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: user.email)
-        .get()
-        .then((snapshot) => snapshot.docs.forEach((document) {
-              final r = document.data() as Map<String, dynamic>;
-              try {
-                setState(() {
-                  name = r['username'];
-                  exp = r['exp'];
-                });
-              } catch (e) {
-                print(e.toString());
-              }
-            }));
-  }
+  // Future getId() async {
+  //   await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .where('email', isEqualTo: user.email)
+  //       .get()
+  //       .then((snapshot) => snapshot.docs.forEach((document) {
+  //             final r = document.data() as Map<String, dynamic>;
+  //             try {
+  //               setState(() {
+  //                 name = r['username'];
+  //                 exp = r['exp'];
+  //               });
+  //             } catch (e) {
+  //               print(e.toString());
+  //             }
+  //           }));
+  // }
 
   @override
   Widget build(BuildContext context) {
-    getId();
+    // getId();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       //backgroundColor: const Color(0xFF292C31),
       body: Container(
         color: const Color(0xFF192A56),
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             //name
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //mainAxisSize: MainAxisSize.max,
+              //mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                //name
                 InkWell(
                   highlightColor: Colors.transparent,
                   splashColor: Colors.transparent,
@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('Thoát Ứng Dụng'),
+                      title: const Text('Thoát Ứng Dụng'),
                       content: const Text('Bạn có chắc muốn Thoát?'),
                       actions: <Widget>[
                         ElevatedButton(
@@ -120,7 +120,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 exit(0);
                               }
                             }),
-                        SizedBox(width: size.width / 4),
                         ElevatedButton(
                             style: const ButtonStyle(
                               backgroundColor:
@@ -146,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('Đăng Xuất Tài Khoản'),
+                      title: const Text('Đăng Xuất Tài Khoản'),
                       content: const Text('Bạn có chắc muốn Đăng Xuất?'),
                       actions: <Widget>[
                         ElevatedButton(
@@ -159,7 +158,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         SignInScreen(onClickedSignUp: () {})),
                               );
                             }),
-                        SizedBox(width: size.width / 4),
                         ElevatedButton(
                           style: const ButtonStyle(
                             backgroundColor:

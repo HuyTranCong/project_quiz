@@ -4,14 +4,14 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:project_quizz/screens/home.dart';
 
-class PageWelcome extends StatefulWidget {
-  const PageWelcome({super.key});
+class WelcomePage extends StatefulWidget {
+  const WelcomePage({super.key});
 
   @override
-  State<PageWelcome> createState() => _PageWelcomeState();
+  State<WelcomePage> createState() => _WelcomePageState();
 }
 
-class _PageWelcomeState extends State<PageWelcome> {
+class _WelcomePageState extends State<WelcomePage> {
   bool _a = false;
   bool _b = false;
   bool _c = false;
