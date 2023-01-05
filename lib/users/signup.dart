@@ -25,7 +25,7 @@ class _SignUpScreenState extends State<SignUpScreen>
   final formKey = GlobalKey<FormState>();
 
   //textController
-  final usernameController = TextEditingController();
+  final displayname = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmpasswordController = TextEditingController();
@@ -33,12 +33,6 @@ class _SignUpScreenState extends State<SignUpScreen>
   @override
   void initState() {
     super.initState();
-    //Lock Device Orientation
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitUp,
-    //   DeviceOrientation.portraitDown,
-    // ]);
-    //End Lock Device Orientation
 
     _controller = AnimationController(
       vsync: this,
@@ -64,14 +58,7 @@ class _SignUpScreenState extends State<SignUpScreen>
 
   @override
   void dispose() {
-    //Lock Device Orientation
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.landscapeRight,
-    //   DeviceOrientation.landscapeLeft,
-    // ]);
-    //End Lock Device Orientation
-
-    usernameController.dispose();
+    displayname.dispose();
     emailController.dispose();
     passwordController.dispose();
     confirmpasswordController.dispose();
@@ -87,9 +74,6 @@ class _SignUpScreenState extends State<SignUpScreen>
       backgroundColor: Color(0xFF292C31),
       body: Stack(
         children: [
-          // const Positioned.fill(
-          //     child: Rive.RiveAnimation.asset(
-          //         "assets/rive_assets/lionel_animation.riv")),
           ScrollConfiguration(
             behavior: MyBehavior(),
             child: SingleChildScrollView(
@@ -133,7 +117,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                   color: Colors.white.withOpacity(.9),
                                 ),
                                 keyboardType: TextInputType.text,
-                                controller: usernameController,
+                                controller: displayname,
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(
                                     Icons.account_circle_outlined,
@@ -377,10 +361,10 @@ class _SignUpScreenState extends State<SignUpScreen>
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
-      // addUserDetails(
-      //   usernameController.text.trim(),
-      //   emailController.text.trim(),
-      // );
+      addUserDetails(
+        displayname.text.trim(),
+        emailController.text.trim(),
+      );
     } on FirebaseAuthException catch (e) {
       print(e);
 
@@ -389,17 +373,17 @@ class _SignUpScreenState extends State<SignUpScreen>
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
-  // Future addUserDetails(String username, String email) async {
-  //   final user = FirebaseAuth.instance.currentUser!;
-  //   await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-  //     'username': username,
-  //     'email': email,
-  //     'imageUrl': null,
-  //     'score': 0,
-  //     'exp': 1,
-  //     'date': Timestamp.now(),
-  //   });
-  // }
+  Future addUserDetails(String displayname, String email) async {
+    final user = FirebaseAuth.instance.currentUser!;
+    await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+      'username': displayname,
+      'email': email,
+      'photoUrl': null,
+      'score': 0,
+      'exp': 1,
+      'date': Timestamp.now(),
+    });
+  }
 }
 
 class MyBehavior extends ScrollBehavior {

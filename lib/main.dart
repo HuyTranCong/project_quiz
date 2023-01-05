@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:project_quizz/components/auth_page.dart';
 import 'package:project_quizz/components/utils.dart';
-import 'package:project_quizz/screens/home.dart';
-import 'package:project_quizz/screens/onboarding.dart';
 import 'package:project_quizz/users/verify_email.dart';
 
 Future main() async {
@@ -54,7 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
         } else if (snapshot.hasError) {
           return Center(child: Text('Có lỗi xảy ra!'));
         } else if (snapshot.hasData) {
-          // return OnBoardingScreen();
           return VerifyEmailPage();
         } else {
           return AuthPage();
