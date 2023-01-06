@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:project_quizz/components/auth_page.dart';
 import 'package:project_quizz/components/utils.dart';
-import 'package:project_quizz/users/verify_email.dart';
+import 'package:project_quizz/screens/users/verify_email.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();

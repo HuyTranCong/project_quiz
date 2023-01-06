@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:project_quizz/screens/home.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:project_quizz/screens/home/home.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -23,6 +23,7 @@ class _WelcomePageState extends State<WelcomePage> {
     // TODO: implement initState
     super.initState();
 
+    //400
     Timer(Duration(milliseconds: 400), () {
       if (mounted) {
         setState(() {
@@ -31,6 +32,7 @@ class _WelcomePageState extends State<WelcomePage> {
       }
     });
 
+    //400
     Timer(Duration(milliseconds: 400), () {
       if (mounted) {
         setState(() {
@@ -39,6 +41,7 @@ class _WelcomePageState extends State<WelcomePage> {
       }
     });
 
+    //1300
     Timer(Duration(milliseconds: 1300), () {
       if (mounted) {
         setState(() {
@@ -47,6 +50,7 @@ class _WelcomePageState extends State<WelcomePage> {
       }
     });
 
+    //1700
     Timer(Duration(milliseconds: 1700), () {
       if (mounted) {
         setState(() {
@@ -55,6 +59,7 @@ class _WelcomePageState extends State<WelcomePage> {
       }
     });
 
+    //3400
     Timer(Duration(milliseconds: 3400), () {
       if (mounted) {
         setState(() {
@@ -63,6 +68,7 @@ class _WelcomePageState extends State<WelcomePage> {
       }
     });
 
+    //3850
     Timer(Duration(milliseconds: 3850), () {
       if (mounted) {
         setState(() {
@@ -95,6 +101,7 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Column(
           children: [
             AnimatedContainer(
+              //900 : 2500
               duration: Duration(milliseconds: _d ? 900 : 2500),
               curve: _d ? Curves.fastLinearToSlowEaseIn : Curves.elasticOut,
               height: _d
@@ -134,6 +141,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         animatedTexts: [
                           FadeAnimatedText(
                             'OVAKE',
+                            //1700
                             duration: const Duration(milliseconds: 1700),
                             textStyle: const TextStyle(
                               fontSize: 30,
@@ -153,8 +161,6 @@ class _WelcomePageState extends State<WelcomePage> {
 }
 
 class ThisIsFadeRoute extends PageRouteBuilder {
-  // final Widget page;
-  // final Widget route;
   var page;
   var route;
 

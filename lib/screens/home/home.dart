@@ -1,10 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fab_circular_menu/fab_circular_menu.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:project_quizz/components/custom_icons.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fab_circular_menu/fab_circular_menu.dart';
+import 'package:project_quizz/components/menu.dart';
 import 'package:project_quizz/data/data_image.dart';
-import 'package:project_quizz/screens/card_scroll.dart';
+import 'package:project_quizz/screens/home/card_scroll.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,6 +27,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final user = FirebaseAuth.instance.currentUser!;
   String? name;
   int exp = 1;
+
+  // getId
   Future getId() async {
     await FirebaseFirestore.instance
         .collection('users')
@@ -234,77 +238,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       child: Scaffold(
         //menu
         floatingActionButton: Builder(
-          builder: (context) => FabCircularMenu(
-            key: fabKey,
-            alignment: Alignment.bottomRight,
-            // ringColor: Colors.white.withAlpha(180),
-            ringColor: Colors.blue.withAlpha(180),
-            ringDiameter: 500.0,
-            ringWidth: 150.0,
-            fabSize: 60.0,
-            fabElevation: 8.0,
-            fabIconBorder: const CircleBorder(
-                side: BorderSide(color: Colors.white, width: 3)),
-            fabColor: const Color(0xFF192A56),
-            fabOpenIcon: const Icon(Icons.menu, color: Colors.white),
-            fabCloseIcon: const Icon(Icons.close, color: Colors.amber),
-            fabMargin: const EdgeInsets.all(16.0),
-            animationDuration: const Duration(milliseconds: 800),
-            animationCurve: Curves.easeInOutCirc,
-            onDisplayChange: ((isOpen) {}),
-            children: <Widget>[
-              RawMaterialButton(
-                // fillColor: Colors.blue.withOpacity(.3),
-                splashColor: const Color(0xFF2D3447),
-                onPressed: () {},
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(24.0),
-                child: const Icon(
-                  Icons.settings_applications_outlined,
-                  color: Colors.white,
-                  size: 40,
-                ),
-              ),
-              RawMaterialButton(
-                onPressed: () {},
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(24.0),
-                child: const Icon(
-                  Icons.shopping_cart_outlined,
-                  color: Color(0xFF2D3447),
-                  size: 40,
-                ),
-              ),
-              RawMaterialButton(
-                onPressed: () {},
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(24.0),
-                child: const Icon(
-                  Icons.account_circle_outlined,
-                  color: Color(0xFF2D3447),
-                  size: 40,
-                ),
-              ),
-              RawMaterialButton(
-                onPressed: () {},
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(24.0),
-                child: const Icon(
-                  Icons.house_outlined,
-                  color: Color(0xFF2D3447),
-                  size: 40,
-                ),
-              ),
-            ],
-          ),
+          builder: (context) => Menu(fabKey: fabKey),
         ),
-        //end menu
 
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              ///////
+              //xin chao user
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
@@ -326,13 +267,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     color: Colors.red))
                           ]),
                     ),
-                    // IconButton(
-                    //     icon: const Icon(CustomIcons.option,
-                    //         size: 12.0, color: Colors.white),
-                    //     onPressed: () {}),
                   ],
                 ),
               ),
+
+              //animated 25+ stories
               Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: Row(
@@ -359,6 +298,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ],
                 ),
               ),
+
+              // //slider
               Stack(
                 children: <Widget>[
                   CardScrollWidget(currentPage),
@@ -374,28 +315,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   )
                 ],
               ),
+
+              //favourite
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    const Text("Favourite",
+                  children: const <Widget>[
+                    Text("Favourite",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 46.0,
                           fontFamily: "Calibre-Semibold",
                           letterSpacing: 1.0,
                         )),
-                    IconButton(
-                        icon: const Icon(
-                          CustomIcons.option,
-                          size: 12.0,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {}),
                   ],
                 ),
               ),
+
+              //latest 9+ stories
               Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: Row(
@@ -421,15 +359,30 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
               ),
               const SizedBox(height: 20.0),
+
+              //last image
               Row(
                 children: <Widget>[
-                  Padding(
-                      padding: const EdgeInsets.only(left: 18.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Image.asset("assets/images/image_02.jpg",
-                            width: 296.0, height: 222.0),
-                      )),
+                  Expanded(
+                    child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.asset("assets/images/image_1.gif",
+                              fit: BoxFit.cover),
+                        )),
+                  ),
+                  Expanded(
+                    child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.asset(
+                            "assets/images/image_02.jpg",
+                            fit: BoxFit.cover,
+                          ),
+                        )),
+                  ),
                 ],
               ),
             ],

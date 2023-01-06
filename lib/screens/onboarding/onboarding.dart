@@ -1,6 +1,6 @@
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:project_quizz/screens/welcome_page.dart';
+import 'package:animations/animations.dart';
+import 'package:project_quizz/screens/onboarding/welcome_page.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
