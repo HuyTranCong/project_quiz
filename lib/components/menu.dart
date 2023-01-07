@@ -16,9 +16,9 @@ class Menu extends StatelessWidget {
     return FabCircularMenu(
       key: fabKey,
       alignment: Alignment.bottomRight,
-      ringColor: Colors.black.withOpacity(.6),
-      ringDiameter: 300.0,
-      ringWidth: 50.0,
+      ringColor: Colors.white.withAlpha(50),
+      ringDiameter: 400.0,
+      ringWidth: 80.0,
       fabSize: 60.0,
       fabIconBorder: const CircleBorder(
           side: BorderSide(
@@ -34,16 +34,17 @@ class Menu extends StatelessWidget {
       onDisplayChange: ((isOpen) {}),
       children: <Widget>[
         RawMaterialButton(
-            fillColor: const Color(0xFF192A56).withOpacity(.8),
-            focusColor: Colors.red,
-            onPressed: () {},
-            shape: const CircleBorder(),
-            padding: const EdgeInsets.all(12.0),
-            child: const Icon(
-              Icons.settings_applications_outlined,
-              color: Colors.white,
-              size: 30,
-            )),
+          fillColor: const Color(0xFF192A56).withOpacity(.8),
+          focusColor: Colors.red,
+          onPressed: () {},
+          shape: const CircleBorder(),
+          padding: const EdgeInsets.all(12.0),
+          child: const Icon(
+            Icons.settings_outlined,
+            color: Colors.white,
+            size: 30,
+          ),
+        ),
         RawMaterialButton(
           fillColor: const Color(0xFF192A56).withOpacity(.8),
           focusColor: Colors.red,
@@ -72,7 +73,7 @@ class Menu extends StatelessWidget {
               size: 30,
             )),
 
-        //pushAndRemoveUntil: xoá toàn bộ route và => route mới
+        //pushAndRemoveUntil: xoá toàn bộ route và return route mới
         RawMaterialButton(
             fillColor: const Color(0xFF192A56).withOpacity(.8),
             focusColor: Colors.red,

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:project_quizz/data/data_image.dart';
+import 'package:project_quizz/models/data_image.dart';
 import 'package:project_quizz/screens/home/home.dart';
 
 class CardScrollWidget extends StatelessWidget {

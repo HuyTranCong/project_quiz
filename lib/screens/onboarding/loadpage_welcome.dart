@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:project_quizz/screens/home/home.dart';
 
-class WelcomePage extends StatefulWidget {
-  const WelcomePage({super.key});
+class LoadPageWelcome extends StatefulWidget {
+  const LoadPageWelcome({super.key});
 
   @override
-  State<WelcomePage> createState() => _WelcomePageState();
+  State<LoadPageWelcome> createState() => _LoadPageWelcomeState();
 }
 
-class _WelcomePageState extends State<WelcomePage> {
+class _LoadPageWelcomeState extends State<LoadPageWelcome> {
   bool _a = false;
   bool _b = false;
   bool _c = false;
@@ -60,7 +60,7 @@ class _WelcomePageState extends State<WelcomePage> {
     });
 
     //3400
-    Timer(Duration(milliseconds: 3400), () {
+    Timer(Duration(milliseconds: 3000), () {
       if (mounted) {
         setState(() {
           _d = true;
@@ -69,7 +69,7 @@ class _WelcomePageState extends State<WelcomePage> {
     });
 
     //3850
-    Timer(Duration(milliseconds: 3850), () {
+    Timer(Duration(milliseconds: 3500), () {
       if (mounted) {
         setState(() {
           Navigator.of(context).pushReplacement(
@@ -82,7 +82,6 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _a = false;
     _b = false;
     _c = false;
@@ -102,7 +101,7 @@ class _WelcomePageState extends State<WelcomePage> {
           children: [
             AnimatedContainer(
               //900 : 2500
-              duration: Duration(milliseconds: _d ? 900 : 2500),
+              duration: Duration(milliseconds: _d ? 800 : 2000),
               curve: _d ? Curves.fastLinearToSlowEaseIn : Curves.elasticOut,
               height: _d
                   ? 0
@@ -144,9 +143,7 @@ class _WelcomePageState extends State<WelcomePage> {
                             //1700
                             duration: const Duration(milliseconds: 1700),
                             textStyle: const TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w700,
-                            ),
+                                fontSize: 30, fontWeight: FontWeight.w700),
                           ),
                         ],
                       )

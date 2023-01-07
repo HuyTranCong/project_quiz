@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
-import 'package:project_quizz/components/utils.dart';
+import 'package:project_quizz/provider/utils.dart';
 import 'package:project_quizz/main.dart';
 
 

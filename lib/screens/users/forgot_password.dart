@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project_quizz/components/utils.dart';
+import 'package:project_quizz/provider/utils.dart';
 import 'package:project_quizz/main.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -54,7 +54,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        title: Text('Forgot Password'),
         iconTheme: IconThemeData(color: Colors.blue),
+        centerTitle: true,
       ),
       backgroundColor: Color(0xFF292C31),
       body: Stack(
@@ -198,7 +200,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: emailController.text.trim());
 
-      Utils.showSnackBar('Vui lòng kiểm tra Email');
+      Utils.showSnackBar('Vui lòng kiểm tra Email của bạn!');
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
     } on FirebaseAuthException catch (e) {
       print(e);
