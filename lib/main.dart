@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -41,6 +45,60 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late ConnectivityResult result;
+  late StreamSubscription subcription;
+  var isConnected = false;
+
+  @override
+  void initState() {
+    super.initState();
+    startStreaming();
+  }
+
+  checkInternet() async {
+    result = await Connectivity().checkConnectivity();
+    if (result != ConnectivityResult.none) {
+      isConnected = true;
+    } else {
+      isConnected = false;
+      showDialogBox();
+    }
+    setState(() {});
+  }
+
+  showDialogBox() {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: const Icon(Icons.error_outline_outlined, size: 30),
+        iconColor: Colors.red,
+        title: const Text('No Internet',
+            style: TextStyle(fontSize: 40, color: Colors.red)),
+        content: const Text(
+          'Vui lòng kiểm tra kết nối Internet của bạn!',
+          style: TextStyle(fontSize: 18, letterSpacing: 2),
+          textAlign: TextAlign.center,
+        ),
+        actions: [
+          CupertinoButton.filled(
+            child: const Text('Thử lại'),
+            onPressed: () {
+              Navigator.pop(context);
+              checkInternet();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  startStreaming() {
+    subcription = Connectivity().onConnectivityChanged.listen((event) async {
+      checkInternet();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
