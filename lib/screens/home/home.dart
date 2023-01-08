@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
+import 'package:flutter/services.dart';
 import 'package:project_quizz/components/menu.dart';
 import 'package:project_quizz/models/data_image.dart';
 import 'package:project_quizz/screens/home/card_scroll.dart';
@@ -45,6 +47,36 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 print(e.toString());
               }
             }));
+  }
+
+  //Disable Back Button
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Are you sure?'),
+            content: const Text('Do you want to exit an App?'),
+            actions: <Widget>[
+              ElevatedButton(
+                  child: const Text('Yes'),
+                  onPressed: () {
+                    if (Platform.isAndroid) {
+                      SystemNavigator.pop();
+                    } else {
+                      exit(0);
+                    }
+                  }),
+              ElevatedButton(
+                  style: const ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(Colors.red)),
+                  child: const Text('No'),
+                  onPressed: () {
+                    Navigator.of(context).pop(false);
+                  }),
+            ],
+          ),
+        )) ??
+        false;
   }
 
   @override
@@ -225,167 +257,170 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     // );
 
     //===================================
-    return Container(
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              colors: [
-            Color(0xFF1B1E44),
-            Color(0xFF2D3447),
-          ],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              tileMode: TileMode.clamp)),
-      child: Scaffold(
-        //menu
-        floatingActionButton: Builder(
-          builder: (context) => Menu(fabKey: fabKey),
-        ),
-
-        backgroundColor: Colors.transparent,
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              //xin chao user
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    RichText(
-                      text: TextSpan(
-                          text: 'Xin chào ',
-                          style: const TextStyle(
-                              fontFamily: "Calibre-Semibold",
-                              fontSize: 36.0,
-                              color: Colors.white),
-                          children: <TextSpan>[
-                            TextSpan(
-                                text: '$name',
-                                style: const TextStyle(
-                                    fontFamily: "Calibre-Semibold",
-                                    fontSize: 46.0,
-                                    color: Colors.red))
-                          ]),
-                    ),
-                  ],
-                ),
-              ),
-
-              //animated 25+ stories
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFff6e6e),
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: const Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 22.0, vertical: 6.0),
-                          child: Text("Animated",
-                              style: TextStyle(color: Colors.white)),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 15.0),
-                    const Text(
-                      "25+ Stories",
-                      style: TextStyle(color: Colors.blueAccent),
-                    ),
-                  ],
-                ),
-              ),
-
-              // //slider
-              Stack(
-                children: <Widget>[
-                  CardScrollWidget(currentPage),
-                  Positioned.fill(
-                    child: PageView.builder(
-                      itemCount: images.length,
-                      controller: controller,
-                      reverse: true,
-                      itemBuilder: (context, index) {
-                        return Container();
-                      },
-                    ),
-                  )
-                ],
-              ),
-
-              //favourite
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const <Widget>[
-                    Text("Favourite",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 46.0,
-                          fontFamily: "Calibre-Semibold",
-                          letterSpacing: 1.0,
-                        )),
-                  ],
-                ),
-              ),
-
-              //latest 9+ stories
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.blueAccent,
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: const Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 22.0, vertical: 6.0),
-                          child: Text("Latest",
-                              style: TextStyle(color: Colors.white)),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 15.0),
-                    const Text("9+ Stories",
-                        style: TextStyle(color: Colors.blueAccent)),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20.0),
-
-              //last image
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Image.asset("assets/images/image_1.gif",
-                              fit: BoxFit.cover),
-                        )),
-                  ),
-                  Expanded(
-                    child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Image.asset(
-                            "assets/images/image_02.jpg",
-                            fit: BoxFit.cover,
-                          ),
-                        )),
-                  ),
-                ],
-              ),
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                colors: [
+              Color(0xFF09031D),
+              Color(0xFF1B1E44),
             ],
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                tileMode: TileMode.clamp)),
+        child: Scaffold(
+          //menu
+          floatingActionButton: Builder(
+            builder: (context) => Menu(fabKey: fabKey),
+          ),
+
+          backgroundColor: Colors.transparent,
+          body: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                //xin chao user
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      RichText(
+                        text: TextSpan(
+                            text: 'Xin chào ',
+                            style: const TextStyle(
+                                fontFamily: "Calibre-Semibold",
+                                fontSize: 36.0,
+                                color: Colors.white),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: '$name',
+                                  style: const TextStyle(
+                                      fontFamily: "Calibre-Semibold",
+                                      fontSize: 46.0,
+                                      color: Colors.red))
+                            ]),
+                      ),
+                    ],
+                  ),
+                ),
+
+                //animated 25+ stories
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFff6e6e),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: const Center(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 22.0, vertical: 6.0),
+                            child: Text("Animated",
+                                style: TextStyle(color: Colors.white)),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 15.0),
+                      const Text(
+                        "25+ Stories",
+                        style: TextStyle(color: Colors.blueAccent),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // //slider
+                Stack(
+                  children: <Widget>[
+                    CardScrollWidget(currentPage),
+                    Positioned.fill(
+                      child: PageView.builder(
+                        itemCount: images.length,
+                        controller: controller,
+                        reverse: true,
+                        itemBuilder: (context, index) {
+                          return Container();
+                        },
+                      ),
+                    )
+                  ],
+                ),
+
+                //favourite
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const <Widget>[
+                      Text("Favourite",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 46.0,
+                            fontFamily: "Calibre-Semibold",
+                            letterSpacing: 1.0,
+                          )),
+                    ],
+                  ),
+                ),
+
+                //latest 9+ stories
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.blueAccent,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: const Center(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 22.0, vertical: 6.0),
+                            child: Text("Latest",
+                                style: TextStyle(color: Colors.white)),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 15.0),
+                      const Text("9+ Stories",
+                          style: TextStyle(color: Colors.blueAccent)),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20.0),
+
+                //last image
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),
+                            child: Image.asset("assets/images/image_1.gif",
+                                fit: BoxFit.cover),
+                          )),
+                    ),
+                    Expanded(
+                      child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),
+                            child: Image.asset(
+                              "assets/images/image_02.jpg",
+                              fit: BoxFit.cover,
+                            ),
+                          )),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

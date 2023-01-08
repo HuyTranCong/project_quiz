@@ -95,7 +95,7 @@ class _LoadPageWelcomeState extends State<LoadPageWelcome> {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color(0xFF09031D),
       body: Center(
         child: Column(
           children: [
@@ -139,11 +139,14 @@ class _LoadPageWelcomeState extends State<LoadPageWelcome> {
                         totalRepeatCount: 1,
                         animatedTexts: [
                           FadeAnimatedText(
-                            'OVAKE',
+                            'Ô VĂN KÊ',
                             //1700
                             duration: const Duration(milliseconds: 1700),
                             textStyle: const TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.w700),
+                              fontSize: 30,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xFF09031D),
+                            ),
                           ),
                         ],
                       )

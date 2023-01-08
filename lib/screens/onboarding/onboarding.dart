@@ -1,7 +1,9 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:animator/animator.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project_quizz/screens/onboarding/loadpage_welcome.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -15,101 +17,112 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xFF00004D).withOpacity(.9),
+      backgroundColor: Color(0xFF09031D),
       body: OpenContainer(
           closedBuilder: (_, OpenContainer) {
-            return Column(
-              children: [
-                //image1
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.amber,
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/13.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Container(
-                        width: size.width,
-                        padding: const EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                          const Color(0xFF1B1E44).withOpacity(.8),
-                          const Color(0xFF2D3447).withOpacity(.2),
-                        ])),
-                        child: AnimatedTextKit(
-                          animatedTexts: [
-                            TyperAnimatedText(
-                              'WELCOME BACK!...',
-                              speed: Duration(milliseconds: 150),
-                              textStyle: TextStyle(
-                                  color: Colors.white.withOpacity(.8),
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  wordSpacing: 5),
-                            )
-                          ],
-                          isRepeatingAnimation: true,
-                          repeatForever: true,
-                          displayFullTextOnTap: true,
-                          stopPauseOnTap: true,
-                        ),
-                      ),
-                    ),
+            return Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/image_3.gif'),
+                    fit: BoxFit.cover,
                   ),
                 ),
+                child: Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          //content
+                          Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                //icon "
+                                const Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Icon(FontAwesomeIcons.quoteLeft,
+                                        size: 30.0, color: Color(0xFF09031D))),
+                                //hockochoi...
+                                Animator(
+                                    triggerOnInit: true,
+                                    curve: Curves.easeIn,
+                                    duration: const Duration(seconds: 1),
+                                    tween: Tween<double>(begin: -1, end: 0),
+                                    builder: (context, animatorState, child) {
+                                      return FractionalTranslation(
+                                          translation:
+                                              Offset(animatorState.value, 0),
+                                          child: child);
+                                    },
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                                colors: [
+                                                  Color(0xFF09031D)
+                                                      .withOpacity(.8),
+                                                  Color(0xFF1B1E44)
+                                                      .withOpacity(.5)
+                                                ],
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                tileMode: TileMode.clamp),
+                                            border: Border.all(width: 2),
+                                            borderRadius:
+                                                BorderRadius.circular(50)),
+                                        child: Padding(
+                                            padding: const EdgeInsets.all(20.0),
+                                            child: Text(
+                                                'Học không chơi đánh rơi tuổi trẻ!',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline2!
+                                                    .copyWith(
+                                                        color:
+                                                            Colors.white))))),
+                                SizedBox(height: 10.0),
 
-                //image2
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          const Color(0xFF1B1E44).withOpacity(.8),
-                          const Color(0xFF2D3447).withOpacity(.2),
-                        ],
-                      ),
-                    ),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        width: size.width,
-                        padding: const EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                          const Color(0xFF1B1E44).withOpacity(.8),
-                          const Color(0xFF2D3447).withOpacity(.2),
-                        ])),
-                        child: AnimatedTextKit(
-                          animatedTexts: [
-                            WavyAnimatedText(
-                                'Game giúp bạn giải trí Giảm bớt căng thẳng trong cuộc sống!',
-                                textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    wordSpacing: 1),
-                                speed: Duration(milliseconds: 150)),
-                          ],
-                          isRepeatingAnimation: true,
-                          repeatForever: true,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            );
+                                //ovake
+                                Animator(
+                                    duration: const Duration(seconds: 2),
+                                    triggerOnInit: true,
+                                    tween: Tween<double>(begin: 1, end: 0),
+                                    builder: (context, animatorState, child) {
+                                      return FractionalTranslation(
+                                        translation:
+                                            Offset(animatorState.value, 0),
+                                        child: child,
+                                      );
+                                    },
+                                    child: Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: Text('__ Ô VĂN KÊ __',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle1!
+                                                .copyWith(
+                                                    color: Color(0xFF09031D),
+                                                    fontSize: 20.0))))
+                              ]),
+
+                          //tap anywhere
+                          Align(
+                              alignment: Alignment.bottomCenter,
+                              child: AnimatedTextKit(
+                                  repeatForever: true,
+                                  animatedTexts: [
+                                    FadeAnimatedText(
+                                        'Tap Anywhere To Continue!!!',
+                                        duration: const Duration(seconds: 5),
+                                        textStyle: TextStyle(
+                                            color: Color(0xFF09031D)
+                                                .withOpacity(.8),
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold))
+                                  ]))
+                        ])));
           },
           openColor: Colors.red,
-          closedShape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(50),
-                bottomRight: Radius.circular(50)),
+          closedShape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
           ),
           transitionDuration: const Duration(milliseconds: 500),
           openBuilder: (_, closeContainer) {
