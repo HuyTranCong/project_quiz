@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project_quiz/main.dart';
-import 'package:project_quiz/screens/users/signin.dart';
+import 'package:project_quizz/main.dart';
+import 'package:project_quizz/screens/users/signin.dart';
 
 class InfoUserScreen extends StatelessWidget {
   InfoUserScreen({super.key});

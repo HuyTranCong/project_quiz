@@ -3,9 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
-import 'package:project_quiz/provider/utils.dart';
-import 'package:project_quiz/main.dart';
-
+import 'package:project_quizz/provider/utils.dart';
+import 'package:project_quizz/main.dart';
 
 class SignUpScreen extends StatefulWidget {
   final Function() onClickedSignIn;
@@ -68,280 +67,305 @@ class _SignUpScreenState extends State<SignUpScreen>
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      backgroundColor: Color(0xFF292C31),
-      body: Stack(
-        children: [
-          ScrollConfiguration(
-            behavior: MyBehavior(),
-            child: SingleChildScrollView(
-              child: SizedBox(
-                height: _height,
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      Expanded(child: SizedBox()),
+    return Container(
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              colors: [
+            Color(0xFF09031D),
+            Color(0xFF1B1E44),
+          ],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              tileMode: TileMode.clamp)),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Stack(
+          children: [
+            ScrollConfiguration(
+              behavior: MyBehavior(),
+              child: SingleChildScrollView(
+                child: SizedBox(
+                  height: _height,
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        Expanded(child: SizedBox()),
 
-                      //text-field
-                      Expanded(
-                        flex: 4,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(),
-                            const Text(
-                              'ĐĂNG KÝ',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFFA9DED8),
-                              ),
-                            ),
-                            SizedBox(),
-
-                            //username textfield
-                            Container(
-                              // height: _width / 8,
-                              width: _width / 1.22,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.only(right: _width / 30),
-                              decoration: BoxDecoration(
-                                color: Color(0xFF212428),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: TextFormField(
+                        //text-field
+                        Expanded(
+                          flex: 4,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(),
+                              const Text(
+                                'ĐĂNG KÝ',
                                 style: TextStyle(
-                                  color: Colors.white.withOpacity(.9),
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFFA9DED8),
                                 ),
-                                keyboardType: TextInputType.text,
-                                controller: displayname,
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(
-                                    Icons.account_circle_outlined,
-                                    color: Colors.white.withOpacity(.7),
-                                  ),
-                                  border: InputBorder.none,
-                                  hintMaxLines: 1,
-                                  hintText: 'Tên tài khoản...',
-                                  hintStyle: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white.withOpacity(.5),
-                                  ),
-                                ),
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                validator: (value) =>
-                                    value != null && value.length < 3
-                                        ? 'Tên tài khoản phải trên 3 ký tự '
-                                        : null,
                               ),
-                            ),
+                              SizedBox(),
 
-                            //email textfield
-                            Container(
-                              // height: _width / 8,
-                              width: _width / 1.22,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.only(right: _width / 30),
-                              decoration: BoxDecoration(
-                                color: Color(0xFF212428),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: TextFormField(
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(.9)),
-                                keyboardType: TextInputType.emailAddress,
-                                controller: emailController,
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(
-                                    Icons.email_outlined,
-                                    color: Colors.white.withOpacity(.7),
-                                  ),
-                                  border: InputBorder.none,
-                                  hintMaxLines: 1,
-                                  hintText: 'Email...',
-                                  hintStyle: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white.withOpacity(.5),
-                                  ),
+                              //username textfield
+                              Container(
+                                // height: _width / 8,
+                                width: _width / 1.22,
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.only(right: _width / 30),
+                                decoration: BoxDecoration(
+                                  color:
+                                      const Color(0xFF09031D).withOpacity(.8),
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                validator: (email) => email != null &&
-                                        !EmailValidator.validate(email)
-                                    ? 'Email không hợp lệ!'
-                                    : null,
-                              ),
-                            ),
-
-                            //password textfield
-                            Container(
-                              // height: _width / 8,
-                              width: _width / 1.22,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.only(right: _width / 30),
-                              decoration: BoxDecoration(
-                                color: Color(0xFF212428),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: TextFormField(
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(.9)),
-                                keyboardType: TextInputType.text,
-                                controller: passwordController,
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(
-                                    Icons.lock_outline,
-                                    color: Colors.white.withOpacity(.7),
+                                child: TextFormField(
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(.9),
                                   ),
-                                  border: InputBorder.none,
-                                  hintMaxLines: 1,
-                                  hintText: 'Mật khẩu...',
-                                  hintStyle: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white.withOpacity(.5),
-                                  ),
-                                ),
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                validator: (value) =>
-                                    value != null && value.length < 6
-                                        ? 'Mật khẩu tối đa 6 ký tự'
-                                        : null,
-                              ),
-                            ),
-
-                            //confirm password textfield
-                            Container(
-                              // height: _width / 8,
-                              width: _width / 1.22,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.only(right: _width / 30),
-                              decoration: BoxDecoration(
-                                color: Color(0xFF212428),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: TextFormField(
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(.9)),
-                                keyboardType: TextInputType.text,
-                                controller: confirmpasswordController,
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(
-                                    Icons.lock_outline,
-                                    color: Colors.white.withOpacity(.7),
-                                  ),
-                                  border: InputBorder.none,
-                                  hintMaxLines: 1,
-                                  hintText: 'Xác nhận mật khẩu...',
-                                  hintStyle: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white.withOpacity(.5),
-                                  ),
-                                ),
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                validator: (value) {
-                                  return passwordController.text == value
-                                      ? null
-                                      : "Mật khẩu không trùng khớp!";
-                                },
-                              ),
-                            ),
-
-                            //already an account? sign in
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    color:
-                                        const Color(0xFF212428).withOpacity(.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: 'Đã có tài khoản! ĐĂNG NHẬP',
-                                      style: const TextStyle(
-                                        color: Color(0xFFA9DED8),
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = widget.onClickedSignIn,
+                                  keyboardType: TextInputType.text,
+                                  controller: displayname,
+                                  decoration: InputDecoration(
+                                    prefixIcon: Icon(
+                                      Icons.account_circle_outlined,
+                                      color: Colors.white.withOpacity(.7),
+                                    ),
+                                    border: InputBorder.none,
+                                    hintMaxLines: 1,
+                                    hintText: 'Tên tài khoản...',
+                                    hintStyle: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.white.withOpacity(.5),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      //button sign-un
-                      Expanded(
-                        flex: 4,
-                        child: Stack(
-                          children: [
-                            Center(
-                              child: Container(
-                                margin: EdgeInsets.only(bottom: _width * .07),
-                                height: _width * .7,
-                                width: _width * .7,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Colors.transparent,
-                                      Colors.transparent,
-                                      Color(0xFF09090A)
-                                    ],
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                  ),
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  validator: (value) =>
+                                      value != null && value.length < 3
+                                          ? 'Tên tài khoản phải trên 3 ký tự '
+                                          : null,
                                 ),
                               ),
-                            ),
-                            Center(
-                              child: Transform.scale(
-                                scale: _animation.value,
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: SignUp,
-                                  child: Container(
-                                    height: _width * .3,
-                                    width: _width * .3,
-                                    alignment: Alignment.center,
+
+                              //email textfield
+                              Container(
+                                // height: _width / 8,
+                                width: _width / 1.22,
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.only(right: _width / 30),
+                                decoration: BoxDecoration(
+                                  color:
+                                      const Color(0xFF09031D).withOpacity(.8),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: TextFormField(
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(.9)),
+                                  keyboardType: TextInputType.emailAddress,
+                                  controller: emailController,
+                                  decoration: InputDecoration(
+                                    prefixIcon: Icon(
+                                      Icons.email_outlined,
+                                      color: Colors.white.withOpacity(.7),
+                                    ),
+                                    border: InputBorder.none,
+                                    hintMaxLines: 1,
+                                    hintText: 'Email...',
+                                    hintStyle: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.white.withOpacity(.5),
+                                    ),
+                                  ),
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  validator: (email) => email != null &&
+                                          !EmailValidator.validate(email)
+                                      ? 'Email không hợp lệ!'
+                                      : null,
+                                ),
+                              ),
+
+                              //password textfield
+                              Container(
+                                // height: _width / 8,
+                                width: _width / 1.22,
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.only(right: _width / 30),
+                                decoration: BoxDecoration(
+                                  color:
+                                      const Color(0xFF09031D).withOpacity(.8),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: TextFormField(
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(.9)),
+                                  keyboardType: TextInputType.text,
+                                  controller: passwordController,
+                                  obscureText: true,
+                                  decoration: InputDecoration(
+                                    prefixIcon: Icon(
+                                      Icons.lock_outline,
+                                      color: Colors.white.withOpacity(.7),
+                                    ),
+                                    border: InputBorder.none,
+                                    hintMaxLines: 1,
+                                    hintText: 'Mật khẩu...',
+                                    hintStyle: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.white.withOpacity(.5),
+                                    ),
+                                  ),
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  validator: (value) =>
+                                      value != null && value.length < 6
+                                          ? 'Mật khẩu tối đa 6 ký tự'
+                                          : null,
+                                ),
+                              ),
+
+                              //confirm password textfield
+                              Container(
+                                // height: _width / 8,
+                                width: _width / 1.22,
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.only(right: _width / 30),
+                                decoration: BoxDecoration(
+                                  color:
+                                      const Color(0xFF09031D).withOpacity(.8),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: TextFormField(
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(.9)),
+                                  keyboardType: TextInputType.text,
+                                  controller: confirmpasswordController,
+                                  obscureText: true,
+                                  decoration: InputDecoration(
+                                    prefixIcon: Icon(
+                                      Icons.lock_outline,
+                                      color: Colors.white.withOpacity(.7),
+                                    ),
+                                    border: InputBorder.none,
+                                    hintMaxLines: 1,
+                                    hintText: 'Xác nhận mật khẩu...',
+                                    hintStyle: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.white.withOpacity(.5),
+                                    ),
+                                  ),
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  validator: (value) {
+                                    return passwordController.text == value
+                                        ? null
+                                        : "Mật khẩu không trùng khớp!";
+                                  },
+                                ),
+                              ),
+
+                              //already an account? sign in
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
-                                      color: Color(0xFFA0DED8).withOpacity(.5),
-                                      shape: BoxShape.circle,
+                                      color: const Color(0xFF09031D)
+                                          .withOpacity(.4),
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
-                                    child: const Text(
-                                      'ĐĂNG KÝ',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18,
+                                    child: RichText(
+                                      text: TextSpan(
+                                        text: 'Đã có tài khoản! ',
+                                        style: const TextStyle(
+                                          color: Color(0xFFA9DED8),
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                            text: 'Đăng Nhập',
+                                            style: const TextStyle(
+                                              color: Colors.redAccent,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = widget.onClickedSignIn,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        //button sign-un
+                        Expanded(
+                          flex: 4,
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: Container(
+                                  margin: EdgeInsets.only(bottom: _width * .07),
+                                  height: _width * .7,
+                                  width: _width * .7,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.transparent,
+                                        Colors.transparent,
+                                        Color(0xFF09090A)
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Center(
+                                child: Transform.scale(
+                                  scale: _animation.value,
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: SignUp,
+                                    child: Container(
+                                      height: _width * .3,
+                                      width: _width * .3,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            Color(0xFFA0DED8).withOpacity(.5),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Text(
+                                        'ĐĂNG KÝ',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

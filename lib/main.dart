@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
-import 'package:project_quiz/provider/auth_page.dart';
-import 'package:project_quiz/provider/utils.dart';
-import 'package:project_quiz/screens/users/verify_email.dart';
+import 'package:project_quizz/provider/auth_page.dart';
+import 'package:project_quizz/provider/utils.dart';
+import 'package:project_quizz/screens/users/verify_email.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
