@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project_quizz/provider/utils.dart';
-import 'package:project_quizz/main.dart';
+import 'package:project_quiz/provider/utils.dart';
+import 'package:project_quiz/main.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});

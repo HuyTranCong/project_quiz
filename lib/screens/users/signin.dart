@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:project_quizz/provider/utils.dart';
-import 'package:project_quizz/main.dart';
-import 'package:project_quizz/screens/users/forgot_password.dart';
+import 'package:project_quiz/provider/utils.dart';
+import 'package:project_quiz/main.dart';
+import 'package:project_quiz/screens/users/forgot_password.dart';
 
 class SignInScreen extends StatefulWidget {
   final VoidCallback onClickedSignUp;

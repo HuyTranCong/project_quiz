@@ -1,7 +1,7 @@
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:project_quizz/screens/home/home.dart';
-import 'package:project_quizz/screens/users/info_user.dart';
+import 'package:project_quiz/screens/home/home.dart';
+import 'package:project_quiz/screens/users/info_user.dart';
 
 class Menu extends StatelessWidget {
   const Menu({
@@ -16,16 +16,13 @@ class Menu extends StatelessWidget {
     return FabCircularMenu(
       key: fabKey,
       alignment: Alignment.bottomRight,
-      ringColor: Colors.white.withAlpha(50),
+      ringColor: Colors.white.withAlpha(80),
       ringDiameter: 400.0,
       ringWidth: 80.0,
       fabSize: 60.0,
-      fabIconBorder: const CircleBorder(
-          side: BorderSide(
-        color: Colors.white,
-        width: 2,
-      )),
-      fabColor: const Color(0xFF192A56).withOpacity(.8),
+      fabIconBorder:
+          const CircleBorder(side: BorderSide(color: Colors.white, width: 2)),
+      fabColor: Colors.transparent,
       fabOpenIcon: const Icon(Icons.menu, color: Colors.white),
       fabCloseIcon: const Icon(Icons.close, color: Colors.white),
       fabMargin: const EdgeInsets.all(16.0),

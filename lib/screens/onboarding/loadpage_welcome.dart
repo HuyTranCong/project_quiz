@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:project_quizz/screens/home/home.dart';
+import 'package:project_quiz/screens/home/home.dart';
 
 class LoadPageWelcome extends StatefulWidget {
   const LoadPageWelcome({super.key});
@@ -139,7 +139,7 @@ class _LoadPageWelcomeState extends State<LoadPageWelcome> {
                         totalRepeatCount: 1,
                         animatedTexts: [
                           FadeAnimatedText(
-                            'Ô VĂN KÊ',
+                            'QUIZ GAME',
                             //1700
                             duration: const Duration(milliseconds: 1700),
                             textStyle: const TextStyle(

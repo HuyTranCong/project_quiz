@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project_quizz/main.dart';
-import 'package:project_quizz/screens/users/signin.dart';
+import 'package:project_quiz/main.dart';
+import 'package:project_quiz/screens/users/signin.dart';
 
 class InfoUserScreen extends StatelessWidget {
   InfoUserScreen({super.key});
@@ -45,7 +45,43 @@ class InfoUserScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Row(
-                  children: [],
+                  children: [
+                    //dang xuat
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.logout_outlined),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                  title: const Text('Are you sure?'),
+                                  content:
+                                      const Text('Do you want to Sign Out?'),
+                                  actions: <Widget>[
+                                    ElevatedButton(
+                                        child: const Text('Yes'),
+                                        onPressed: () {
+                                          FirebaseAuth.instance.signOut();
+                                          navigatorKey.currentState?.push(
+                                              MaterialPageRoute(
+                                                  builder: (_) => SignInScreen(
+                                                      onClickedSignUp: () {})));
+                                        }),
+                                    ElevatedButton(
+                                        style: const ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStatePropertyAll(
+                                                    Colors.red)),
+                                        child: const Text('No'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        })
+                                  ]);
+                            });
+                      },
+                      label: Text('ĐĂNG XUẤT'),
+                    ),
+                  ],
                 ),
               ),
             ],

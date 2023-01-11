@@ -1,14 +1,15 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/services.dart';
-import 'package:project_quizz/components/menu.dart';
-import 'package:project_quizz/models/data_image.dart';
-import 'package:project_quizz/screens/home/card_scroll.dart';
+import 'package:intl/intl.dart';
+import 'package:project_quiz/components/menu.dart';
+import 'package:project_quiz/models/data_image.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -274,150 +275,181 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           floatingActionButton: Builder(
             builder: (context) => Menu(fabKey: fabKey),
           ),
-
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
             child: Column(
-              children: <Widget>[
-                //xin chao user
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      RichText(
-                        text: TextSpan(
-                            text: 'Xin chào ',
-                            style: const TextStyle(
-                                fontFamily: "Calibre-Semibold",
-                                fontSize: 36.0,
-                                color: Colors.white),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: '$name',
-                                  style: const TextStyle(
-                                      fontFamily: "Calibre-Semibold",
-                                      fontSize: 46.0,
-                                      color: Colors.red))
-                            ]),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //time
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 2, color: Colors.red),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Text(
+                      DateFormat('hh:mm:ss a').format(DateTime.now()),
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(.8),
+                        fontSize: 18,
                       ),
-                    ],
+                    ),
                   ),
                 ),
 
-                //animated 25+ stories
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFff6e6e),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: const Center(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 22.0, vertical: 6.0),
-                            child: Text("Animated",
-                                style: TextStyle(color: Colors.white)),
-                          ),
-                        ),
+                //name
+                Column(
+                  children: [
+                    RichText(
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          const TextSpan(
+                              text: 'Xin Chào ',
+                              style: TextStyle(fontSize: 26.0)),
+                          TextSpan(
+                              text: '$name',
+                              style: TextStyle(
+                                  fontSize: 30, color: Colors.red.shade600)),
+                        ],
                       ),
-                      const SizedBox(width: 15.0),
-                      const Text(
-                        "25+ Stories",
-                        style: TextStyle(color: Colors.blueAccent),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // //slider
-                Stack(
-                  children: <Widget>[
-                    CardScrollWidget(currentPage),
-                    Positioned.fill(
-                      child: PageView.builder(
-                        itemCount: images.length,
-                        controller: controller,
-                        reverse: true,
-                        itemBuilder: (context, index) {
-                          return Container();
-                        },
-                      ),
-                    )
+                    ),
                   ],
                 ),
 
-                //favourite
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const <Widget>[
-                      Text("Favourite",
+                // const SizedBox(height: 50),
+
+                //button play
+                Container(
+                  width: size.width,
+                  // height: size.height / 4,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.white,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Ink.image(
+                            image: AssetImage('assets/images/image_4.gif'),
+                            fit: BoxFit.cover,
+                            height: 150,
+                            width: 150,
+                            child: InkWell(
+                              highlightColor: Colors.black.withOpacity(.6),
+                              splashColor: Colors.white.withOpacity(.4),
+                              onTap: () {},
+                            ),
+                          ),
+                          Ink.image(
+                            image: AssetImage('assets/images/image_1.gif'),
+                            fit: BoxFit.cover,
+                            height: 150,
+                            width: 150,
+                            child: InkWell(
+                              highlightColor: Colors.black.withOpacity(.6),
+                              splashColor: Colors.white.withOpacity(.4),
+                              onTap: () {},
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [],
+                      ),
+                    ],
+                  ),
+                ),
+
+                // const SizedBox(height: 50),
+                Container(
+                  width: size.width,
+                  // height: size.height / 1.5,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.white,
+                    ),
+                  ),
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      AnimatedButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'Lịch sử chơi đơn',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      AnimatedButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'Bảng xếp hạng',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      AnimatedButton(
+                        width: size.width / 4,
+                        color: Colors.red,
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Are you sure?'),
+                                content:
+                                    const Text('Do you want to Exit Game?'),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      if (Platform.isAndroid) {
+                                        SystemNavigator.pop();
+                                      } else {
+                                        exit(0);
+                                      }
+                                    },
+                                    child: const Text('Yes'),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    style: const ButtonStyle(
+                                      backgroundColor: MaterialStatePropertyAll(
+                                        Colors.red,
+                                      ),
+                                    ),
+                                    child: const Text('No'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        child: const Text(
+                          'Thoát',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 46.0,
-                            fontFamily: "Calibre-Semibold",
-                            letterSpacing: 1.0,
-                          )),
-                    ],
-                  ),
-                ),
-
-                //latest 9+ stories
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.blueAccent,
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: const Center(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 22.0, vertical: 6.0),
-                            child: Text("Latest",
-                                style: TextStyle(color: Colors.white)),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
-                      const SizedBox(width: 15.0),
-                      const Text("9+ Stories",
-                          style: TextStyle(color: Colors.blueAccent)),
                     ],
                   ),
-                ),
-                const SizedBox(height: 20.0),
-
-                //last image
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),
-                            child: Image.asset("assets/images/image_1.gif",
-                                fit: BoxFit.cover),
-                          )),
-                    ),
-                    Expanded(
-                      child: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),
-                            child: Image.asset(
-                              "assets/images/image_02.jpg",
-                              fit: BoxFit.cover,
-                            ),
-                          )),
-                    ),
-                  ],
                 ),
               ],
             ),
