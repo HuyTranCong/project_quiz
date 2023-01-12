@@ -51,159 +51,139 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
-    return Container(
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              colors: [
-            Color(0xFF09031D),
-            Color(0xFF1B1E44),
-          ],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              tileMode: TileMode.clamp)),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          title: Text('Quên Mật Khẩu'),
-          iconTheme: IconThemeData(color: Colors.blue),
-          centerTitle: true,
-        ),
+    return Scaffold(
+      appBar: AppBar(
         backgroundColor: Colors.transparent,
-        body: Stack(
-          children: [
-            ScrollConfiguration(
-              behavior: MyBehavior(),
-              child: SingleChildScrollView(
-                child: SizedBox(
-                  height: _height,
-                  child: Column(
-                    children: [
-                      const Expanded(child: SizedBox()),
+        title: Text('Quên Mật Khẩu'),
+        iconTheme: IconThemeData(color: Colors.blue),
+        centerTitle: true,
+      ),
+      backgroundColor: Color(0xFF292C31),
+      body: Stack(
+        children: [
+          ScrollConfiguration(
+            behavior: MyBehavior(),
+            child: SingleChildScrollView(
+              child: SizedBox(
+                height: _height,
+                child: Column(
+                  children: [
+                    const Expanded(child: SizedBox()),
 
-                      //text-field
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const SizedBox(),
-                            const Text(
-                              'NHẬP EMAIL ĐỂ ĐẶT LẠI MẬT KHẨU CỦA BẠN!',
-                              textAlign: TextAlign.center,
+                    //text-field
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const SizedBox(),
+                          const Text(
+                            'NHẬP EMAIL ĐỂ ĐẶT LẠI MẬT KHẨU CỦA BẠN!',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFFA9DED8)),
+                          ),
+                          const SizedBox(),
+
+                          //email textfield
+                          Container(
+                            width: _width / 1.22,
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.only(right: _width / 30),
+                            decoration: BoxDecoration(
+                              color: Color(0xFF212428),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: TextFormField(
+                              controller: emailController,
                               style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFFA9DED8)),
-                            ),
-                            const SizedBox(),
-
-                            //email textfield
-                            Container(
-                              width: _width / 1.2,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF09031D).withOpacity(.8),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: TextFormField(
-                                controller: emailController,
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(.9)),
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(
-                                    Icons.email_outlined,
-                                    color: Colors.white.withOpacity(.7),
-                                  ),
-                                  suffixIcon: emailController.text.isEmpty
-                                      ? Container(width: 0)
-                                      : IconButton(
-                                          focusColor: Colors.transparent,
-                                          onPressed: () =>
-                                              emailController.clear(),
-                                          icon: Icon(Icons.close,
-                                              color: Colors.white
-                                                  .withOpacity(.5))),
-                                  border: InputBorder.none,
-                                  hintMaxLines: 1,
-                                  hintText: 'Email...',
-                                  hintStyle: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white.withOpacity(.5),
-                                  ),
+                                  color: Colors.white.withOpacity(.9)),
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.email_outlined,
+                                  color: Colors.white.withOpacity(.7),
                                 ),
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                validator: (email) => email != null &&
-                                        !EmailValidator.validate(email)
-                                    ? 'Email không hợp lệ!'
-                                    : null,
+                                border: InputBorder.none,
+                                hintMaxLines: 1,
+                                hintText: 'Email...',
+                                hintStyle: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white.withOpacity(.5),
+                                ),
                               ),
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              validator: (email) => email != null &&
+                                      !EmailValidator.validate(email)
+                                  ? 'Email không hợp lệ!'
+                                  : null,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
+                    ),
 
-                      //button resetPassword
-                      Expanded(
-                        flex: 3,
-                        child: Stack(
-                          children: [
-                            Center(
-                              child: Container(
-                                margin: EdgeInsets.only(bottom: _width * .07),
-                                height: _width * .7,
-                                width: _width * .7,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Colors.transparent,
-                                      Colors.transparent,
-                                      Color(0xFF09090A)
-                                    ],
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
+                    //button resetPassword
+                    Expanded(
+                      flex: 3,
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: Container(
+                              margin: EdgeInsets.only(bottom: _width * .07),
+                              height: _width * .7,
+                              width: _width * .7,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.transparent,
+                                    Colors.transparent,
+                                    Color(0xFF09090A)
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Transform.scale(
+                              scale: _animation.value,
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: resetPassword,
+                                child: Container(
+                                  height: _width * .3,
+                                  width: _width * .3,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      color: Color(0xFFA0DED8).withOpacity(.5),
+                                      shape: BoxShape.circle),
+                                  child: const Text(
+                                    'XÁC NHẬN',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18),
                                   ),
                                 ),
                               ),
                             ),
-                            Center(
-                              child: Transform.scale(
-                                scale: _animation.value,
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: resetPassword,
-                                  child: Container(
-                                    height: _width * .3,
-                                    width: _width * .3,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        color:
-                                            Color(0xFFA0DED8).withOpacity(.5),
-                                        shape: BoxShape.circle),
-                                    child: const Text(
-                                      'XÁC NHẬN',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 18),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

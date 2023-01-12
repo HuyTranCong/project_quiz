@@ -19,9 +19,6 @@ class _SignUpScreenState extends State<SignUpScreen>
   late AnimationController _controller;
   late Animation<double> _animation;
 
-  //hidden pass
-  bool isHidden = false;
-
   final formKey = GlobalKey<FormState>();
 
   //textController
@@ -205,22 +202,12 @@ class _SignUpScreenState extends State<SignUpScreen>
                                       color: Colors.white.withOpacity(.9)),
                                   keyboardType: TextInputType.text,
                                   controller: passwordController,
-                                  obscureText: !isHidden,
+                                  obscureText: true,
                                   decoration: InputDecoration(
                                     prefixIcon: Icon(
                                       Icons.lock_outline,
                                       color: Colors.white.withOpacity(.7),
                                     ),
-                                    suffixIcon: IconButton(
-                                        onPressed: togglePassword,
-                                        icon: isHidden
-                                            ? Icon(Icons.visibility_outlined,
-                                                color: Colors.white
-                                                    .withOpacity(.5))
-                                            : Icon(
-                                                Icons.visibility_off_outlined,
-                                                color: Colors.white
-                                                    .withOpacity(.5))),
                                     border: InputBorder.none,
                                     hintMaxLines: 1,
                                     hintText: 'Mật khẩu...',
@@ -254,22 +241,12 @@ class _SignUpScreenState extends State<SignUpScreen>
                                       color: Colors.white.withOpacity(.9)),
                                   keyboardType: TextInputType.text,
                                   controller: confirmpasswordController,
-                                  obscureText: !isHidden,
+                                  obscureText: true,
                                   decoration: InputDecoration(
                                     prefixIcon: Icon(
                                       Icons.lock_outline,
                                       color: Colors.white.withOpacity(.7),
                                     ),
-                                    suffixIcon: IconButton(
-                                        onPressed: togglePassword,
-                                        icon: isHidden
-                                            ? Icon(Icons.visibility_outlined,
-                                                color: Colors.white
-                                                    .withOpacity(.5))
-                                            : Icon(
-                                                Icons.visibility_off_outlined,
-                                                color: Colors.white
-                                                    .withOpacity(.5))),
                                     border: InputBorder.none,
                                     hintMaxLines: 1,
                                     hintText: 'Xác nhận mật khẩu...',
@@ -393,10 +370,6 @@ class _SignUpScreenState extends State<SignUpScreen>
     );
   }
 
-  //hide_show pass
-  void togglePassword() => setState(() => isHidden = !isHidden);
-
-  //ham dang ky
   Future SignUp() async {
     final isValid = formKey.currentState!.validate();
     if (!isValid) return;
@@ -429,7 +402,7 @@ class _SignUpScreenState extends State<SignUpScreen>
       'email': email,
       'photoUrl': null,
       'score': 0,
-      'exp': 0,
+      'exp': 1,
       'date': Timestamp.now(),
     });
   }

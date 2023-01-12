@@ -113,6 +113,7 @@ class _SignInScreenState extends State<SignInScreen>
                                 Container(
                                   width: _width / 1.2,
                                   alignment: Alignment.center,
+                                  // padding: EdgeInsets.only(right: _width / 30),
                                   decoration: BoxDecoration(
                                     color:
                                         const Color(0xFF09031D).withOpacity(.8),

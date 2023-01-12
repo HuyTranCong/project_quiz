@@ -6,10 +6,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project_quizz/main.dart';
 import 'package:project_quizz/provider/auth_page.dart';
 import 'package:project_quizz/screens/users/change_password.dart';
-import 'package:project_quizz/screens/users/signin.dart';
 
 class InfoUserScreen extends StatefulWidget {
-  const InfoUserScreen({super.key});
+  InfoUserScreen({super.key});
 
   @override
   State<InfoUserScreen> createState() => _InfoUserScreenState();
@@ -17,12 +16,11 @@ class InfoUserScreen extends StatefulWidget {
 
 class _InfoUserScreenState extends State<InfoUserScreen> {
   final fabKey = GlobalKey<FabCircularMenuState>();
-
+  final auth = FirebaseAuth.instance;
   final user = FirebaseAuth.instance.currentUser!;
   String? name;
   int exp = 0;
-
-  Future getId() async {
+  Future getDocId() async {
     await FirebaseFirestore.instance
         .collection('users')
         .where('email', isEqualTo: user.email)
@@ -44,7 +42,6 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
 
   @override
   Widget build(BuildContext context) {
-    getId();
     Size size = MediaQuery.of(context).size;
     return Container(
       decoration: const BoxDecoration(
@@ -58,12 +55,8 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
               tileMode: TileMode.clamp)),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Thông tin cá nhân',
-              style: TextStyle(color: Colors.black, fontSize: 30)),
-          centerTitle: true,
           backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          iconTheme: const IconThemeData(color: Colors.purple),
+          iconTheme: const IconThemeData(color: Color(0xFF09031D)),
         ),
         extendBodyBehindAppBar: true,
         backgroundColor: Colors.transparent,
@@ -217,7 +210,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                         onPressed: () {
                           showDialog(
                             context: context,
-                            builder: (context) {
+                            builder: (BuildContext context) {
                               return AlertDialog(
                                 title: const Text('Are you sure?'),
                                 content: const Text('Do you want to Sign Out?'),
