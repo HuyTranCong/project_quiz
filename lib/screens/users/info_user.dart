@@ -20,7 +20,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
   final user = FirebaseAuth.instance.currentUser!;
   String? name;
   int exp = 0;
-  Future getDocId() async {
+  Future getId() async {
     await FirebaseFirestore.instance
         .collection('users')
         .where('email', isEqualTo: user.email)
@@ -42,6 +42,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
 
   @override
   Widget build(BuildContext context) {
+    getId();
     Size size = MediaQuery.of(context).size;
     return Container(
       decoration: const BoxDecoration(
@@ -55,7 +56,11 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
               tileMode: TileMode.clamp)),
       child: Scaffold(
         appBar: AppBar(
+          title: Text('Hồ Sơ',
+              style: TextStyle(color: Colors.black, fontSize: 30)),
+          centerTitle: true,
           backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
           iconTheme: const IconThemeData(color: Color(0xFF09031D)),
         ),
         extendBodyBehindAppBar: true,

@@ -54,7 +54,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text('Quên Mật Khẩu'),
+        shadowColor: Colors.transparent,
+        title: Text('Quên Mật Khẩu',
+            style: TextStyle(color: Colors.black, fontSize: 30)),
         iconTheme: IconThemeData(color: Colors.blue),
         centerTitle: true,
       ),

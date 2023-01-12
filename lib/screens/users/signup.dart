@@ -402,7 +402,7 @@ class _SignUpScreenState extends State<SignUpScreen>
       'email': email,
       'photoUrl': null,
       'score': 0,
-      'exp': 1,
+      'exp': 0,
       'date': Timestamp.now(),
     });
   }
