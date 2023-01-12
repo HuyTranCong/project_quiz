@@ -1,12 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-// import 'package:rive/rive.dart' as Rive;
-
-import '../components/utils.dart';
-import '../main.dart';
+import 'package:project_quizz/provider/utils.dart';
+import 'package:project_quizz/main.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -26,12 +22,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
   @override
   void initState() {
     super.initState();
-    //Lock Device Orientation
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitUp,
-    //   DeviceOrientation.portraitDown,
-    // ]);
-    //End Lock Device Orientation
 
     _controller =
         AnimationController(vsync: this, duration: Duration(seconds: 2));
@@ -52,13 +42,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
 
   @override
   void dispose() {
-    //Lock Device Orientation
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.landscapeRight,
-    //   DeviceOrientation.landscapeLeft,
-    // ]);
-    //End Lock Device Orientation
-
     emailController.dispose();
     _controller.dispose();
     super.dispose();
@@ -71,14 +54,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        title: Text('Quên Mật Khẩu',
+            style: TextStyle(color: Colors.black, fontSize: 30)),
         iconTheme: IconThemeData(color: Colors.blue),
+        centerTitle: true,
       ),
       backgroundColor: Color(0xFF292C31),
       body: Stack(
         children: [
-          // Positioned.fill(
-          //     child: Rive.RiveAnimation.asset(
-          //         "assets/rive_assets/lionel_animation.riv")),
           ScrollConfiguration(
             behavior: MyBehavior(),
             child: SingleChildScrollView(
@@ -107,7 +91,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
 
                           //email textfield
                           Container(
-                            // height: _width / 8,
                             width: _width / 1.22,
                             alignment: Alignment.center,
                             padding: EdgeInsets.only(right: _width / 30),
@@ -219,7 +202,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: emailController.text.trim());
 
-      Utils.showSnackBar('Vui lòng kiểm tra Email');
+      Utils.showSnackBar('Vui lòng kiểm tra Email của bạn!');
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
     } on FirebaseAuthException catch (e) {
       print(e);

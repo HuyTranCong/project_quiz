@@ -1,17 +1,17 @@
 import 'dart:async';
 
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:project_quizz/screens/home.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:project_quizz/screens/home/home.dart';
 
-class PageWelcome extends StatefulWidget {
-  const PageWelcome({super.key});
+class LoadPageWelcome extends StatefulWidget {
+  const LoadPageWelcome({super.key});
 
   @override
-  State<PageWelcome> createState() => _PageWelcomeState();
+  State<LoadPageWelcome> createState() => _LoadPageWelcomeState();
 }
 
-class _PageWelcomeState extends State<PageWelcome> {
+class _LoadPageWelcomeState extends State<LoadPageWelcome> {
   bool _a = false;
   bool _b = false;
   bool _c = false;
@@ -23,6 +23,7 @@ class _PageWelcomeState extends State<PageWelcome> {
     // TODO: implement initState
     super.initState();
 
+    //400
     Timer(Duration(milliseconds: 400), () {
       if (mounted) {
         setState(() {
@@ -31,6 +32,7 @@ class _PageWelcomeState extends State<PageWelcome> {
       }
     });
 
+    //400
     Timer(Duration(milliseconds: 400), () {
       if (mounted) {
         setState(() {
@@ -39,6 +41,7 @@ class _PageWelcomeState extends State<PageWelcome> {
       }
     });
 
+    //1300
     Timer(Duration(milliseconds: 1300), () {
       if (mounted) {
         setState(() {
@@ -47,6 +50,7 @@ class _PageWelcomeState extends State<PageWelcome> {
       }
     });
 
+    //1700
     Timer(Duration(milliseconds: 1700), () {
       if (mounted) {
         setState(() {
@@ -55,7 +59,8 @@ class _PageWelcomeState extends State<PageWelcome> {
       }
     });
 
-    Timer(Duration(milliseconds: 3400), () {
+    //3400
+    Timer(Duration(milliseconds: 3000), () {
       if (mounted) {
         setState(() {
           _d = true;
@@ -63,7 +68,8 @@ class _PageWelcomeState extends State<PageWelcome> {
       }
     });
 
-    Timer(Duration(milliseconds: 3850), () {
+    //3850
+    Timer(Duration(milliseconds: 3500), () {
       if (mounted) {
         setState(() {
           Navigator.of(context).pushReplacement(
@@ -76,7 +82,6 @@ class _PageWelcomeState extends State<PageWelcome> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _a = false;
     _b = false;
     _c = false;
@@ -90,12 +95,13 @@ class _PageWelcomeState extends State<PageWelcome> {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color(0xFF09031D),
       body: Center(
         child: Column(
           children: [
             AnimatedContainer(
-              duration: Duration(milliseconds: _d ? 900 : 2500),
+              //900 : 2500
+              duration: Duration(milliseconds: _d ? 800 : 2000),
               curve: _d ? Curves.fastLinearToSlowEaseIn : Curves.elasticOut,
               height: _d
                   ? 0
@@ -133,11 +139,13 @@ class _PageWelcomeState extends State<PageWelcome> {
                         totalRepeatCount: 1,
                         animatedTexts: [
                           FadeAnimatedText(
-                            'OVAKE',
+                            'QUIZ GAME',
+                            //1700
                             duration: const Duration(milliseconds: 1700),
                             textStyle: const TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.w700,
+                              color: Color(0xFF09031D),
                             ),
                           ),
                         ],
@@ -153,8 +161,6 @@ class _PageWelcomeState extends State<PageWelcome> {
 }
 
 class ThisIsFadeRoute extends PageRouteBuilder {
-  // final Widget page;
-  // final Widget route;
   var page;
   var route;
 
