@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:project_quizz/components/menu.dart';
 import 'package:project_quizz/models/data_image.dart';
+import 'package:project_quizz/screens/users/info_user.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   final user = FirebaseAuth.instance.currentUser!;
   String? name;
-  int exp = 1;
 
   // getId
   Future getId() async {
@@ -42,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               try {
                 setState(() {
                   name = r['username'];
-                  exp = r['exp'];
                 });
               } catch (e) {
                 print(e.toString());
@@ -91,106 +90,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         currentPage = controller.page!;
       });
     });
-
-    // return Scaffold(
-    //   body: Container(
-    //     color: const Color(0xFF192A56),
-    //     child: Column(
-    //       //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //       children: <Widget>[
-    //         //name
-    //         Center(
-    //           child: Text(
-    //             '$name',
-    //             style: TextStyle(
-    //               color: Colors.white.withOpacity(.7),
-    //               fontWeight: FontWeight.w500,
-    //               fontSize: 20,
-    //             ),
-    //           ),
-    //         ),
-
-    //         //email
-    //         Text(user.email!),
-
-    //         //exit
-    //         ElevatedButton.icon(
-    //           icon: const Icon(Icons.exit_to_app_outlined),
-    //           onPressed: () {
-    //             showDialog(
-    //               context: context,
-    //               builder: (BuildContext context) {
-    //                 return AlertDialog(
-    //                   title: const Text('Thoát Ứng Dụng'),
-    //                   content: const Text('Bạn có chắc muốn Thoát?'),
-    //                   actions: <Widget>[
-    //                     ElevatedButton(
-    //                         child: const Text('Có'),
-    //                         onPressed: () {
-    //                           if (Platform.isAndroid) {
-    //                             SystemNavigator.pop();
-    //                           } else {
-    //                             exit(0);
-    //                           }
-    //                         }),
-    //                     ElevatedButton(
-    //                         style: const ButtonStyle(
-    //                           backgroundColor:
-    //                               MaterialStatePropertyAll(Colors.red),
-    //                         ),
-    //                         child: const Text('Không'),
-    //                         onPressed: () {
-    //                           Navigator.of(context).pop();
-    //                         }),
-    //                   ],
-    //                 );
-    //               },
-    //             );
-    //           },
-    //           label: Text('THOÁT'),
-    //         ),
-
-    //         //logout
-    //         ElevatedButton.icon(
-    //           icon: const Icon(Icons.logout_outlined),
-    //           onPressed: () {
-    //             showDialog(
-    //               context: context,
-    //               builder: (BuildContext context) {
-    //                 return AlertDialog(
-    //                   title: const Text('Đăng Xuất Tài Khoản'),
-    //                   content: const Text('Bạn có chắc muốn Đăng Xuất?'),
-    //                   actions: <Widget>[
-    //                     ElevatedButton(
-    //                         child: const Text('Có'),
-    //                         onPressed: () {
-    //                           FirebaseAuth.instance.signOut();
-    //                           navigatorKey.currentState?.push(
-    //                             MaterialPageRoute(
-    //                                 builder: (_) =>
-    //                                     SignInScreen(onClickedSignUp: () {})),
-    //                           );
-    //                         }),
-    //                     ElevatedButton(
-    //                       style: const ButtonStyle(
-    //                         backgroundColor:
-    //                             MaterialStatePropertyAll(Colors.red),
-    //                       ),
-    //                       child: const Text('Không'),
-    //                       onPressed: () {
-    //                         Navigator.of(context).pop();
-    //                       },
-    //                     ),
-    //                   ],
-    //                 );
-    //               },
-    //             );
-    //           },
-    //           label: Text('ĐĂNG XUẤT'),
-    //         ),
-    //       ],
-    //     ),
-    //   ),
 
     //===================================
     return WillPopScope(
@@ -276,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         color: Colors.deepPurple,
                         onPressed: () {},
                         child: const Text(
-                          'chơi đơn',
+                          'Chơi đơn',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -294,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         color: Colors.red,
                         onPressed: () {},
                         child: const Text(
-                          'chơi đối kháng',
+                          'Chơi đối kháng',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
