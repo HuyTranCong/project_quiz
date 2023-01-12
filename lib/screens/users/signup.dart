@@ -233,7 +233,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                       AutovalidateMode.onUserInteraction,
                                   validator: (value) =>
                                       value != null && value.length < 6
-                                          ? 'Mật khẩu tối đa 6 ký tự'
+                                          ? 'Mật khẩu tối thiểu 6 ký tự'
                                           : null,
                                 ),
                               ),

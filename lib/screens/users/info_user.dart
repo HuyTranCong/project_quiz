@@ -1,16 +1,15 @@
-import 'dart:io';
-
 import 'package:animated_button/animated_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:project_quizz/main.dart';
+import 'package:project_quizz/provider/auth_page.dart';
+import 'package:project_quizz/screens/users/change_password.dart';
 import 'package:project_quizz/screens/users/signin.dart';
 
 class InfoUserScreen extends StatefulWidget {
-  InfoUserScreen({super.key});
+  const InfoUserScreen({super.key});
 
   @override
   State<InfoUserScreen> createState() => _InfoUserScreenState();
@@ -50,14 +49,13 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
     return Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(
-        colors: [
-          Color(0xFF09031D),
-          Color(0xFF1B1E44),
-        ],
-        begin: Alignment.bottomCenter,
-        end: Alignment.topCenter,
-        tileMode: TileMode.clamp,
-      )),
+              colors: [
+            Color(0xFF09031D),
+            Color(0xFF1B1E44),
+          ],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              tileMode: TileMode.clamp)),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Thông tin cá nhân',
@@ -75,8 +73,8 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                 height: size.height / 3,
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
-                      color: Colors.black.withOpacity(.9),
-                      offset: Offset(3, 10),
+                      color: Colors.black.withOpacity(.8),
+                      offset: const Offset(1, 10),
                       blurRadius: 1000)
                 ]),
                 child: Image.asset(
@@ -108,10 +106,11 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                       //username
                       SizedBox(
                         child: ListTile(
+                          tileColor: Colors.purple.withOpacity(.2),
                           iconColor: Colors.white,
                           textColor: Colors.white,
-                          leading:
-                              Icon(Icons.account_circle_outlined, size: 40),
+                          leading: const Icon(Icons.account_circle_outlined,
+                              size: 40),
                           title: Text(
                             '$name',
                             maxLines: 1,
@@ -119,13 +118,18 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                             style: const TextStyle(fontSize: 20),
                           ),
                           trailing: Icon(Icons.arrow_circle_right_outlined),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ChangePasswordScreen(),
+                            ));
+                          },
                         ),
                       ),
 
                       //email
                       SizedBox(
                         child: ListTile(
+                          tileColor: Colors.purple.withOpacity(.2),
                           iconColor: Colors.white,
                           textColor: Colors.white,
                           leading: Icon(Icons.email_outlined, size: 40),
@@ -192,6 +196,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                       SizedBox(
                         width: size.width / 2,
                         child: ListTile(
+                          tileColor: Colors.purple.withOpacity(.2),
                           iconColor: Colors.white,
                           textColor: Colors.white,
                           leading: Icon(Icons.attach_money_outlined, size: 40),
@@ -220,10 +225,13 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                                   ElevatedButton(
                                     onPressed: () {
                                       FirebaseAuth.instance.signOut();
-                                      navigatorKey.currentState?.push(
-                                          MaterialPageRoute(
-                                              builder: (_) => SignInScreen(
-                                                  onClickedSignUp: () {})));
+
+                                      navigatorKey.currentState
+                                          ?.pushAndRemoveUntil(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AuthPage()),
+                                              (route) => false);
                                     },
                                     child: const Text('Yes'),
                                   ),
