@@ -198,10 +198,6 @@ class _SignInScreenState extends State<SignInScreen>
                                     ),
                                     autovalidateMode:
                                         AutovalidateMode.onUserInteraction,
-                                    validator: (value) =>
-                                        value != null && value.length < 6
-                                            ? 'Mật khẩu tối thiểu 6 ký tự'
-                                            : null,
                                   ),
                                 ),
 

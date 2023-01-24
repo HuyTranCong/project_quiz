@@ -20,7 +20,6 @@ class _LoadPageWelcomeState extends State<LoadPageWelcome> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     //400
