@@ -16,10 +16,13 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
   bool isEmailVerified = false;
   bool canResendEmail = false;
   Timer? timer;
+  int _countdownTime = 5;
 
   @override
   void initState() {
     super.initState();
+    _startTimer();
+
     isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
     if (!isEmailVerified) {
       sendVerificationEmail();
@@ -34,7 +37,6 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
   @override
   void dispose() {
     timer?.cancel();
-
     super.dispose();
   }
 
@@ -61,6 +63,18 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
     }
   }
 
+  void _startTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_countdownTime > 0) {
+          _countdownTime--;
+        } else {
+          timer.cancel();
+        }
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) => isEmailVerified
       ? OnBoardingScreen()
@@ -68,8 +82,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
           backgroundColor: Color(0xFF292C31),
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: const Text('Verify Email'),
-            
+            title: Text('Verify Email'),
           ),
           body: Container(
             decoration: const BoxDecoration(
@@ -99,7 +112,14 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                       label: const Text('Gửi lại mã',
                           style: TextStyle(fontSize: 24)),
                       onPressed: canResendEmail ? sendVerificationEmail : null),
-                  const SizedBox(height: 8),
+                  Text(
+                    '$_countdownTime',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
                   TextButton(
                     style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(50)),

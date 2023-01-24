@@ -8,13 +8,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:project_quizz/provider/auth_page.dart';
 import 'package:project_quizz/provider/utils.dart';
+import 'package:project_quizz/screens/home/home.dart';
 import 'package:project_quizz/screens/users/verify_email.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     runApp(const MyApp());
   });
 }
