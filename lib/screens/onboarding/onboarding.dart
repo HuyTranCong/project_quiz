@@ -6,7 +6,7 @@ import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:project_quizz/screens/home/home.dart';
 
 class OnBoardingScreen extends StatefulWidget {
-      OnBoardingScreen({super.key});
+  OnBoardingScreen({super.key});
 
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
@@ -99,7 +99,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                     animatedTexts: [
                       WavyAnimatedText(
                         'WELCOME BACK!',
-                        textStyle:     TextStyle(
+                        textStyle: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 40.0),
@@ -140,7 +140,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                             width: 200,
                             height: 80,
                             decoration: BoxDecoration(
-                              color: Colors.orange,
+                              color: Colors.red.withOpacity(.5),
                               border: Border.all(width: 1),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
