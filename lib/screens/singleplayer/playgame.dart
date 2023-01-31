@@ -7,7 +7,7 @@ import 'package:project_quizz/models/question.dart';
 import 'package:project_quizz/screens/singleplayer/result.dart';
 
 class PlayGameScreen extends StatefulWidget {
-      PlayGameScreen({
+  PlayGameScreen({
     Key? key,
     required this.totalTime,
     required this.questions,
@@ -29,7 +29,6 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
   @override
   void initState() {
     super.initState();
-
     currentTime = widget.totalTime;
 
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -38,10 +37,26 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
         setState(() {
           currentTime -= 1;
         });
-      if (_currentIndex == 0) {
+      if (currentTime == 0) {
         timer.cancel();
 
-        //pushResultScreen(context);
+        pushResultScreen(context);
+      }
+    });
+  }
+
+  @override
+  void runtimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      print(currentTime);
+      if (mounted)
+        setState(() {
+          currentTime -= 1;
+        });
+      if (currentTime == 0) {
+        timer.cancel();
+
+        pushResultScreen(context);
       }
     });
   }
@@ -49,7 +64,6 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
   @override
   void dispose() {
     timer.cancel();
-
     super.dispose();
   }
 
@@ -70,7 +84,7 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
     final currentQuestion = widget.questions[_currentIndex];
 
     return Container(
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: [
             Color(0xFF09031D),
@@ -82,90 +96,127 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
-          child: Container(
-            margin:     EdgeInsets.symmetric(horizontal: 10.0),
-            width: size.width,
-            height: size.height / 1.5,
-            decoration: BoxDecoration(
-              // border: Border.all(width: 1, color: Colors.white),
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'CÂU HỎI:',
-                      style: TextStyle(
-                          color: Colors.lightBlue,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                //cauhoi
-                Container(
-                  width: size.width,
-                  height: size.width / 2.5,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    gradient: LinearGradient(
-                      colors: GradientColors.indigo,
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                    ),
-                  ),
-                  margin:     EdgeInsets.symmetric(vertical: 20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              //time
+              SizedBox(
+                height: 20,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Stack(
+                    fit: StackFit.expand,
                     children: [
-                      Text(
-                        currentQuestion.question,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
+                      LinearProgressIndicator(
+                        value: currentTime / widget.totalTime,
+                        color: timer.tick >= currentTime * 3.5
+                            ? Colors.redAccent
+                            : timer.tick >= currentTime * 1
+                                ? Colors.yellow
+                                : Colors.green,
+                      ),
+                      Center(
+                        child: Text(
+                          currentTime.toString(),
+                          style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 20),
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
+              ),
 
-                //dapan
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: currentQuestion.answers.length,
-                    itemBuilder: (context, index) {
-                      final answer = currentQuestion.answers[index];
-                      return AnswerTile(
-                        isSelected: answer == _selectedAnswer,
-                        answer: answer,
-                        correctAnswer: currentQuestion.correctAnswer,
-                        onTap: () {
-                          setState(() {
-                            _selectedAnswer = answer;
-                          });
-                          if (answer == currentQuestion.correctAnswer) {
-                            _score += 10;
-                          }
-                          Future.delayed(Duration(milliseconds: 200), (() {
-                            if (_currentIndex == widget.questions.length - 1) {
-                              pushResultScreen(context);
-                              return;
-                            }
-                            setState(() {
-                              _currentIndex++;
-                              _selectedAnswer = '';
-                            });
-                          }));
-                        },
-                      );
-                    },
-                  ),
+              //question + answers
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10.0),
+                width: size.width,
+                height: size.height / 1.2,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: Colors.white),
+                  borderRadius: BorderRadius.circular(30),
                 ),
-              ],
-            ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'CÂU HỎI:',
+                          style: TextStyle(
+                              color: Colors.lightBlue,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    //cauhoi
+                    Container(
+                      width: size.width,
+                      height: size.width / 2.5,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: LinearGradient(
+                          colors: GradientColors.indigo,
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                        ),
+                      ),
+                      margin: EdgeInsets.symmetric(vertical: 20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            currentQuestion.question,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //dapan
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: currentQuestion.answers.length,
+                        itemBuilder: (context, index) {
+                          final answer = currentQuestion.answers[index];
+                          return AnswerTile(
+                            isSelected: answer == _selectedAnswer,
+                            answer: answer,
+                            correctAnswer: currentQuestion.correctAnswer,
+                            onTap: () {
+                              setState(() {
+                                _selectedAnswer = answer;
+                              });
+                              if (answer == currentQuestion.correctAnswer) {
+                                _score += 10;
+                              }
+                              Future.delayed(Duration(milliseconds: 200), (() {
+                                if (_currentIndex ==
+                                    widget.questions.length - 1) {
+                                  pushResultScreen(context);
+                                  return;
+                                }
+                                setState(() {
+                                  _currentIndex++;
+                                  _selectedAnswer = '';
+                                });
+                              }));
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
