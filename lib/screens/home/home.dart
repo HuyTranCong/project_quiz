@@ -13,7 +13,7 @@ import 'package:project_quizz/screens/rank/rank.dart';
 import 'package:project_quizz/screens/singleplayer/singleplayer.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -51,11 +51,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return (await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Are you sure?'),
-            content: const Text('Do you want to exit an App?'),
+            title: Text('Are you sure?'),
+            content: Text('Do you want to exit an App?'),
             actions: <Widget>[
               ElevatedButton(
-                  child: const Text('Yes'),
+                  child: Text('Yes'),
                   onPressed: () {
                     if (Platform.isAndroid) {
                       SystemNavigator.pop();
@@ -64,9 +64,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     }
                   }),
               ElevatedButton(
-                  style: const ButtonStyle(
+                  style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(Colors.red)),
-                  child: const Text('No'),
+                  child: Text('No'),
                   onPressed: () {
                     Navigator.of(context).pop(false);
                   }),
@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             gradient: LinearGradient(
                 colors: [
               Color(0xFF09031D),
@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
           backgroundColor: Colors.transparent,
           body: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(10.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -114,11 +114,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Xin Chào ',
+                          Text('Xin Chào ',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20)),
                           Text('$name',
-                              style: const TextStyle(
+                              style: TextStyle(
                                   color: Colors.red,
                                   fontSize: 30,
                                   overflow: TextOverflow.ellipsis)),
@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     Expanded(
                       flex: 2,
                       child: Container(
-                        padding: const EdgeInsets.all(5.0),
+                        padding: EdgeInsets.all(5.0),
                         decoration: BoxDecoration(
                             border: Border.all(width: 2, color: Colors.red),
                             borderRadius: BorderRadius.circular(5)),
@@ -160,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       builder: (context) => SinglePlayerScreen(),
                     ));
                   },
-                  child: const Text(
+                  child: Text(
                     'Chơi Đơn',
                     style: TextStyle(
                       fontSize: 20,
@@ -176,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       builder: (context) => RankScreen(),
                     ));
                   },
-                  child: const Text(
+                  child: Text(
                     'Đấu Đôi',
                     style: TextStyle(
                       fontSize: 20,
@@ -189,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 AnimatedButton(
                   color: Colors.orange,
                   onPressed: () {},
-                  child: const Text(
+                  child: Text(
                     'Lịch Sử Chơi',
                     style: TextStyle(
                       fontSize: 20,
@@ -202,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 AnimatedButton(
                   color: Colors.orange,
                   onPressed: () {},
-                  child: const Text(
+                  child: Text(
                     'Bảng Xếp Hạng',
                     style: TextStyle(
                       fontSize: 20,
@@ -220,8 +220,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: const Text('Are you sure?'),
-                          content: const Text('Do you want to Exit Game?'),
+                          title: Text('Are you sure?'),
+                          content: Text('Do you want to Exit Game?'),
                           actions: <Widget>[
                             ElevatedButton(
                               onPressed: () {
@@ -231,25 +231,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   exit(0);
                                 }
                               },
-                              child: const Text('Yes'),
+                              child: Text('Yes'),
                             ),
                             ElevatedButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              style: const ButtonStyle(
+                              style: ButtonStyle(
                                 backgroundColor: MaterialStatePropertyAll(
                                   Colors.red,
                                 ),
                               ),
-                              child: const Text('No'),
+                              child: Text('No'),
                             ),
                           ],
                         );
                       },
                     );
                   },
-                  child: const Text(
+                  child: Text(
                     'Thoát',
                     style: TextStyle(
                       color: Colors.white,

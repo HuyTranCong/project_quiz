@@ -7,7 +7,7 @@ import 'package:project_quizz/models/question.dart';
 import 'package:project_quizz/screens/singleplayer/result.dart';
 
 class PlayGameScreen extends StatefulWidget {
-  const PlayGameScreen({
+      PlayGameScreen({
     Key? key,
     required this.totalTime,
     required this.questions,
@@ -70,7 +70,7 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
     final currentQuestion = widget.questions[_currentIndex];
 
     return Container(
-      decoration: const BoxDecoration(
+      decoration:  BoxDecoration(
           gradient: LinearGradient(
               colors: [
             Color(0xFF09031D),
@@ -83,7 +83,7 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
         backgroundColor: Colors.transparent,
         body: Center(
           child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10.0),
+            margin:     EdgeInsets.symmetric(horizontal: 10.0),
             width: size.width,
             height: size.height / 1.5,
             decoration: BoxDecoration(
@@ -116,7 +116,7 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
                       end: Alignment.topCenter,
                     ),
                   ),
-                  margin: const EdgeInsets.symmetric(vertical: 20.0),
+                  margin:     EdgeInsets.symmetric(vertical: 20.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

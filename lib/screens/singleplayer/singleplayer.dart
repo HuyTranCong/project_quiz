@@ -5,12 +5,12 @@ import 'package:project_quizz/components/option_topic.dart';
 import 'package:project_quizz/screens/singleplayer/select_difficulty.dart';
 
 class SinglePlayerScreen extends StatelessWidget {
-  const SinglePlayerScreen({super.key});
+    SinglePlayerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration:   BoxDecoration(
           gradient: LinearGradient(
               colors: [
             Color(0xFF09031D),
@@ -23,9 +23,9 @@ class SinglePlayerScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
-          title: const Text('Chủ Đề',
+          title:   Text('Chủ Đề',
               style: TextStyle(color: Color(0xFFA9DED8), fontSize: 30)),
-          iconTheme: const IconThemeData(color: Colors.blue),
+          iconTheme:   IconThemeData(color: Colors.blue),
           centerTitle: true,
         ),
         backgroundColor: Colors.transparent,
@@ -35,13 +35,13 @@ class SinglePlayerScreen extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return AnimationConfiguration.staggeredList(
                 position: index,
-                delay: const Duration(milliseconds: 100),
+                delay:   Duration(milliseconds: 100),
                 child: SlideAnimation(
-                  duration: const Duration(milliseconds: 2500),
+                  duration:   Duration(milliseconds: 2500),
                   curve: Curves.fastLinearToSlowEaseIn,
                   verticalOffset: -250,
                   child: ScaleAnimation(
-                    duration: const Duration(milliseconds: 1500),
+                    duration:   Duration(milliseconds: 1500),
                     curve: Curves.fastLinearToSlowEaseIn,
                     child: Column(
                       children: [

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:project_quizz/models/question.dart';
 import 'package:project_quizz/screens/home/home.dart';
 import 'package:project_quizz/screens/singleplayer/playgame.dart';
-import 'package:project_quizz/screens/singleplayer/singleplayer.dart';
 
 class ResultScreen extends StatefulWidget {
   ResultScreen(
@@ -126,7 +125,7 @@ class _ResultScreenState extends State<ResultScreen> {
               SizedBox(height: 20.0),
               Text(
                 '${widget.score} ĐIỂM',
-                style: TextStyle(color: Colors.white, fontSize: 50),
+                style: TextStyle(color: Colors.yellow, fontSize: 50),
               ),
               Spacer(),
               //button
@@ -153,7 +152,8 @@ class _ResultScreenState extends State<ResultScreen> {
                       ),
                       (route) => false);
                 },
-                child: Text('Trang Chủ', style: TextStyle(fontSize: 20)),
+                child: Text('Trang Chủ',
+                    style: TextStyle(fontSize: 20, color: Colors.white)),
               ),
               Spacer(),
             ],

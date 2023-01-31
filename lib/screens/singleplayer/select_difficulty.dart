@@ -5,7 +5,7 @@ import 'package:project_quizz/models/question.dart';
 import 'package:project_quizz/screens/singleplayer/playgame.dart';
 
 class DifficultyScreen extends StatefulWidget {
-  const DifficultyScreen({Key? key, required this.topic}) : super(key: key);
+    DifficultyScreen({Key? key, required this.topic}) : super(key: key);
 
   final int topic;
 
@@ -18,7 +18,7 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Container(
-      decoration: const BoxDecoration(
+      decoration:   BoxDecoration(
           gradient: LinearGradient(
               colors: [
             Color(0xFF09031D),
@@ -31,9 +31,9 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
-          title: const Text('Chọn Độ Khó',
+          title:   Text('Chọn Độ Khó',
               style: TextStyle(color: Color(0xFFA9DED8), fontSize: 30)),
-          iconTheme: const IconThemeData(color: Colors.blue),
+          iconTheme:   IconThemeData(color: Colors.blue),
           centerTitle: true,
         ),
         backgroundColor: Colors.transparent,
@@ -52,7 +52,7 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
-                      return const Center(
+                      return   Center(
                         child: CircularProgressIndicator(),
                       );
                     }
@@ -67,7 +67,7 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
                       builder: (context, snapshot) {
                         print(snapshot.error);
                         if (!snapshot.hasData) {
-                          return const Center(
+                          return   Center(
                             child: CircularProgressIndicator(),
                           );
                         }
@@ -88,7 +88,7 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
                                   ),
                                 );
                               },
-                              child: const Text(
+                              child:   Text(
                                 'Dễ',
                                 style: TextStyle(
                                   fontSize: 20,
@@ -97,7 +97,7 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
                               ),
                             ),
                             Text('Tổng câu hỏi: ${questions.length}',
-                                style: const TextStyle(
+                                style:   TextStyle(
                                     color: Colors.white, fontSize: 20)),
                           ],
                         );
@@ -115,7 +115,7 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
-                      return const Center(
+                      return   Center(
                         child: CircularProgressIndicator(),
                       );
                     }
@@ -130,7 +130,7 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
                       builder: (context, snapshot) {
                         print(snapshot.error);
                         if (!snapshot.hasData) {
-                          return const Center(
+                          return   Center(
                             child: CircularProgressIndicator(),
                           );
                         }
@@ -151,7 +151,7 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
                                   ),
                                 );
                               },
-                              child: const Text(
+                              child:   Text(
                                 'Thường',
                                 style: TextStyle(
                                   fontSize: 20,
@@ -160,7 +160,7 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
                               ),
                             ),
                             Text('Tổng câu hỏi: ${questions.length}',
-                                style: const TextStyle(
+                                style:   TextStyle(
                                     color: Colors.white, fontSize: 20)),
                           ],
                         );
@@ -178,7 +178,7 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
-                      return const Center(
+                      return   Center(
                         child: CircularProgressIndicator(),
                       );
                     }
@@ -193,7 +193,7 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
                       builder: (context, snapshot) {
                         print(snapshot.error);
                         if (!snapshot.hasData) {
-                          return const Center(
+                          return   Center(
                             child: CircularProgressIndicator(),
                           );
                         }
@@ -214,7 +214,7 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
                                   ),
                                 );
                               },
-                              child: const Text(
+                              child:   Text(
                                 'Khó',
                                 style: TextStyle(
                                   fontSize: 20,
@@ -223,7 +223,7 @@ class _DifficultyScreenState extends State<DifficultyScreen> {
                               ),
                             ),
                             Text('Tổng câu hỏi: ${questions.length}',
-                                style: const TextStyle(
+                                style:   TextStyle(
                                     color: Colors.white, fontSize: 20)),
                           ],
                         );
