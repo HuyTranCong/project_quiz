@@ -143,7 +143,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                             width: 200,
                             height: 60,
                             decoration: BoxDecoration(
-                              // color: Colors.red.withOpacity(.5),
                               border: Border.all(width: 2, color: Colors.white),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(50)),
@@ -163,7 +162,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                         Positioned.fill(
                           child: Center(
                             child: AnimatedTextKit(
-                              pause: Duration(milliseconds: 500),
+                              pause: Duration(milliseconds: 100),
                               repeatForever: true,
                               isRepeatingAnimation: true,
                               animatedTexts: [

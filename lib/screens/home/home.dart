@@ -220,29 +220,34 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: Text('Are you sure?'),
-                          content: Text('Do you want to Exit Game?'),
+                          title: Text('Thoát Trò Chơi'),
+                          content: Text('Bạn có chắc muốn thoát Trò Chơi?'),
                           actions: <Widget>[
-                            ElevatedButton(
-                              onPressed: () {
-                                if (Platform.isAndroid) {
-                                  SystemNavigator.pop();
-                                } else {
-                                  exit(0);
-                                }
-                              },
-                              child: Text('Yes'),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStatePropertyAll(
-                                  Colors.red,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(
+                                      Colors.red,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    if (Platform.isAndroid) {
+                                      SystemNavigator.pop();
+                                    } else {
+                                      exit(0);
+                                    }
+                                  },
+                                  child: Text('Có'),
                                 ),
-                              ),
-                              child: Text('No'),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('Không'),
+                                ),
+                              ],
                             ),
                           ],
                         );
