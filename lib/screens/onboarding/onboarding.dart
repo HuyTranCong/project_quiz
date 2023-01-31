@@ -168,7 +168,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                               animatedTexts: [
                                 FadeAnimatedText('GET STARTED!',
                                     textStyle: TextStyle(
-                                      fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                     ))

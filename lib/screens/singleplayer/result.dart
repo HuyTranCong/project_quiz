@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project_quizz/models/question.dart';
-import 'package:project_quizz/screens/home/home.dart';
 import 'package:project_quizz/screens/singleplayer/playgame.dart';
+import 'package:project_quizz/screens/singleplayer/singleplayer.dart';
 
 class ResultScreen extends StatefulWidget {
   ResultScreen(
@@ -146,11 +146,9 @@ class _ResultScreenState extends State<ResultScreen> {
               AnimatedButton(
                 color: Colors.red,
                 onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
-                      ),
-                      (route) => false);
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => SinglePlayerScreen(),
+                  ));
                 },
                 child: Text('Trang Chủ',
                     style: TextStyle(fontSize: 20, color: Colors.white)),

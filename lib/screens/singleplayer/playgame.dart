@@ -51,7 +51,6 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
     });
   }
 
-  @override
   void runtimer() {
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
       print(currentTime);
