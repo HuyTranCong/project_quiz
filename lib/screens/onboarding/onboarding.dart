@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
-import 'package:project_quizz/screens/onboarding/loadpage_welcome.dart';
+import 'package:project_quizz/screens/home/home.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -22,6 +22,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       backgroundColor: const Color(0xFF09031D),
       body: OpenContainer(
           closedBuilder: (_, OpenContainer) {
+            // welcome back!
             return SizedBox(
               height: double.infinity,
               child: Stack(
@@ -148,7 +149,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
           transitionDuration: const Duration(milliseconds: 500),
           openBuilder: (_, closeContainer) {
-            return LoadPageWelcome();
+            return HomeScreen();
           }),
     );
   }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:project_quizz/components/option_topic.dart';
+import 'package:project_quizz/screens/singleplayer/select_difficulty.dart';
 
 class SinglePlayerScreen extends StatelessWidget {
   const SinglePlayerScreen({super.key});
@@ -34,27 +35,45 @@ class SinglePlayerScreen extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return AnimationConfiguration.staggeredList(
                 position: index,
-                delay: Duration(milliseconds: 100),
+                delay: const Duration(milliseconds: 100),
                 child: SlideAnimation(
-                  duration: Duration(milliseconds: 2500),
+                  duration: const Duration(milliseconds: 2500),
                   curve: Curves.fastLinearToSlowEaseIn,
                   verticalOffset: -250,
                   child: ScaleAnimation(
-                    duration: Duration(milliseconds: 1500),
+                    duration: const Duration(milliseconds: 1500),
                     curve: Curves.fastLinearToSlowEaseIn,
                     child: Column(
                       children: [
                         Topic(
-                          color: Colors.amber,
+                          colors: GradientColors.nightParty,
                           title: 'Sinh Học',
-                          press: () {},
+                          press: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => DifficultyScreen(topic: 1),
+                            ));
+                          },
                           pathImage: 'assets/gif/sinhhoc.gif',
                         ),
                         Topic(
-                          color: Colors.blue,
+                          colors: MoreGradientColors.instagram,
                           title: 'Lịch Sử',
-                          press: () {},
+                          press: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => DifficultyScreen(topic: 2),
+                            ));
+                          },
                           pathImage: 'assets/gif/lichsu.gif',
+                        ),
+                        Topic(
+                          colors: MoreGradientColors.lunada,
+                          title: 'Địa Lý',
+                          press: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => DifficultyScreen(topic: 3),
+                            ));
+                          },
+                          pathImage: 'assets/gif/dialy.gif',
                         ),
                       ],
                     ),

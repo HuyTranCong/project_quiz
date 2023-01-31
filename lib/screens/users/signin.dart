@@ -362,7 +362,6 @@ class _SignInScreenState extends State<SignInScreen>
 }
 
 class MyBehavior extends ScrollBehavior {
-  @override
   Widget buildViewportChrome(
       BuildContext context, Widget child, AxisDirection axisDirection) {
     return child;

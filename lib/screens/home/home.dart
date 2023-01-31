@@ -9,17 +9,14 @@ import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:project_quizz/components/menu.dart';
-import 'package:project_quizz/screens/home/rank.dart';
-import 'package:project_quizz/screens/home/singleplayer.dart';
+import 'package:project_quizz/screens/rank/rank.dart';
+import 'package:project_quizz/screens/singleplayer/singleplayer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
-var cardAspectRatio = 12.0 / 16.0;
-var widgetAspectRatio = cardAspectRatio * 1.2;
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final fabKey = GlobalKey<FabCircularMenuState>();
@@ -37,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         .where('email', isEqualTo: user.email)
         .get()
         .then((snapshot) => snapshot.docs.forEach((document) {
-              final r = document.data() as Map<String, dynamic>;
+              final r = document.data();
               try {
                 setState(() {
                   name = r['username'];
@@ -171,7 +168,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
-                //choixephang
+
+                //daudoi
                 AnimatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
@@ -179,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ));
                   },
                   child: const Text(
-                    'Chơi Xếp Hạng',
+                    'Đấu Đôi',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -192,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   color: Colors.orange,
                   onPressed: () {},
                   child: const Text(
-                    'Lịch sử chơi',
+                    'Lịch Sử Chơi',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -205,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   color: Colors.orange,
                   onPressed: () {},
                   child: const Text(
-                    'Bảng xếp hạng',
+                    'Bảng Xếp Hạng',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,

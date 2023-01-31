@@ -206,12 +206,12 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                                   onPressed: () {
                                     FirebaseAuth.instance.signOut();
 
-                                    navigatorKey.currentState
-                                        ?.pushAndRemoveUntil(
-                                            MaterialPageRoute(
-                                              builder: (context) => AuthPage(),
-                                            ),
-                                            (route) => false);
+                                    // navigatorKey.currentState
+                                    //     ?.pushAndRemoveUntil(
+                                    //         MaterialPageRoute(
+                                    //           builder: (context) => AuthPage(),
+                                    //         ),
+                                    //         (route) => false);
                                   },
                                   child: const Text('Yes'),
                                 ),
