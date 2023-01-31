@@ -1,8 +1,13 @@
 import 'package:animated_button/animated_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project_quizz/models/question.dart';
+import 'package:project_quizz/screens/home/home.dart';
+import 'package:project_quizz/screens/singleplayer/playgame.dart';
+import 'package:project_quizz/screens/singleplayer/singleplayer.dart';
 
-class ResultScreen extends StatelessWidget {
+class ResultScreen extends StatefulWidget {
   ResultScreen(
       {super.key,
       required this.score,
@@ -11,6 +16,66 @@ class ResultScreen extends StatelessWidget {
   final int score;
   final List<Question> questions;
   final int totalTime;
+
+  @override
+  State<ResultScreen> createState() => _ResultScreenState();
+}
+
+class _ResultScreenState extends State<ResultScreen> {
+  Future _updateHightScore() async {
+    final AuthUser = FirebaseAuth.instance.currentUser;
+
+    if (AuthUser == null) return;
+
+    final userRef =
+        FirebaseFirestore.instance.collection('users').doc(AuthUser.uid);
+
+    final userDoc = await userRef.get();
+    if (userDoc.exists) {
+      final user = userDoc.data();
+      if (user == null) return;
+
+      final lastHighScore = user['score'];
+      var result = widget.score;
+      result = lastHighScore >= widget.score ? lastHighScore : widget.score;
+
+      userRef.update({
+        'score': result,
+        'date': Timestamp.now(),
+        'exp': user['exp'] +
+            (widget.score >= widget.questions.length / 2 * 10 ? 10 : 5),
+      });
+
+      return;
+    }
+  }
+
+  Future _history() async {
+    final AuthUser = FirebaseAuth.instance.currentUser;
+
+    if (AuthUser == null) return;
+
+    final userRef =
+        FirebaseFirestore.instance.collection('users').doc(AuthUser.uid);
+    final userDoc = await userRef.get();
+
+    final user = userDoc.data();
+    var username = user!['username'];
+    FirebaseFirestore.instance.collection('history').add({
+      'date': Timestamp.now(),
+      'username': username,
+      'email': AuthUser.email,
+      'score': widget.score,
+    });
+    return;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _updateHightScore();
+    _history();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,21 +125,35 @@ class ResultScreen extends StatelessWidget {
               ),
               SizedBox(height: 20.0),
               Text(
-                '$score ĐIỂM',
+                '${widget.score} ĐIỂM',
                 style: TextStyle(color: Colors.white, fontSize: 50),
               ),
               Spacer(),
               //button
               AnimatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => PlayGameScreen(
+                      totalTime: widget.totalTime,
+                      questions: widget.questions,
+                    ),
+                  ));
+                },
                 child: Text('Chơi lại', style: TextStyle(fontSize: 20)),
               ),
 
               SizedBox(height: 20.0),
 
               AnimatedButton(
-                onPressed: () {},
-                child: Text('Về Trang Chủ', style: TextStyle(fontSize: 20)),
+                color: Colors.red,
+                onPressed: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => HomeScreen(),
+                      ),
+                      (route) => false);
+                },
+                child: Text('Trang Chủ', style: TextStyle(fontSize: 20)),
               ),
               Spacer(),
             ],

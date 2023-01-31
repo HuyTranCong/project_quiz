@@ -195,41 +195,42 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                     AnimatedButton(
                       color: Colors.red,
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text('Are you sure?'),
-                              content: const Text('Do you want to Sign Out?'),
-                              actions: <Widget>[
-                                ElevatedButton(
-                                  onPressed: () {
-                                    FirebaseAuth.instance.signOut();
+                        FirebaseAuth.instance.signOut();
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (BuildContext context) {
+                        //     return AlertDialog(
+                        //       title: const Text('Are you sure?'),
+                        //       content: const Text('Do you want to Sign Out?'),
+                        //       actions: <Widget>[
+                        //         ElevatedButton(
+                        //           onPressed: () {
+                        //             FirebaseAuth.instance.signOut();
 
-                                    // navigatorKey.currentState
-                                    //     ?.pushAndRemoveUntil(
-                                    //         MaterialPageRoute(
-                                    //           builder: (context) => AuthPage(),
-                                    //         ),
-                                    //         (route) => false);
-                                  },
-                                  child: const Text('Yes'),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  style: const ButtonStyle(
-                                    backgroundColor: MaterialStatePropertyAll(
-                                      Colors.red,
-                                    ),
-                                  ),
-                                  child: const Text('No'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                        //             // navigatorKey.currentState
+                        //             //     ?.pushAndRemoveUntil(
+                        //             //         MaterialPageRoute(
+                        //             //           builder: (context) => AuthPage(),
+                        //             //         ),
+                        //             //         (route) => false);
+                        //           },
+                        //           child: const Text('Yes'),
+                        //         ),
+                        //         ElevatedButton(
+                        //           onPressed: () {
+                        //             Navigator.of(context).pop();
+                        //           },
+                        //           style: const ButtonStyle(
+                        //             backgroundColor: MaterialStatePropertyAll(
+                        //               Colors.red,
+                        //             ),
+                        //           ),
+                        //           child: const Text('No'),
+                        //         ),
+                        //       ],
+                        //     );
+                        //   },
+                        // );
                       },
                       child: const Text(
                         'Đăng Xuất',
