@@ -8,7 +8,7 @@ import 'package:project_quizz/main.dart';
 
 class SignUpScreen extends StatefulWidget {
   final Function() onClickedSignIn;
-  const SignUpScreen({super.key, required this.onClickedSignIn});
+    SignUpScreen({super.key, required this.onClickedSignIn});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -68,7 +68,7 @@ class _SignUpScreenState extends State<SignUpScreen>
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
     return Container(
-      decoration: const BoxDecoration(
+      decoration:   BoxDecoration(
           gradient: LinearGradient(
               colors: [
             Color(0xFF09031D),
@@ -99,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(),
-                              const Text(
+                                Text(
                                 'ĐĂNG KÝ',
                                 style: TextStyle(
                                   fontSize: 25,
@@ -117,7 +117,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                 padding: EdgeInsets.only(right: _width / 30),
                                 decoration: BoxDecoration(
                                   color:
-                                      const Color(0xFF09031D).withOpacity(.8),
+                                        Color(0xFF09031D).withOpacity(.8),
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: TextFormField(
@@ -156,7 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                 padding: EdgeInsets.only(right: _width / 30),
                                 decoration: BoxDecoration(
                                   color:
-                                      const Color(0xFF09031D).withOpacity(.8),
+                                        Color(0xFF09031D).withOpacity(.8),
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: TextFormField(
@@ -194,7 +194,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                 padding: EdgeInsets.only(right: _width / 30),
                                 decoration: BoxDecoration(
                                   color:
-                                      const Color(0xFF09031D).withOpacity(.8),
+                                        Color(0xFF09031D).withOpacity(.8),
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: TextFormField(
@@ -233,7 +233,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                 padding: EdgeInsets.only(right: _width / 30),
                                 decoration: BoxDecoration(
                                   color:
-                                      const Color(0xFF09031D).withOpacity(.8),
+                                        Color(0xFF09031D).withOpacity(.8),
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: TextFormField(
@@ -270,22 +270,22 @@ class _SignUpScreenState extends State<SignUpScreen>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Container(
-                                    padding: const EdgeInsets.all(10),
+                                    padding:   EdgeInsets.all(10),
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFF09031D)
+                                      color:   Color(0xFF09031D)
                                           .withOpacity(.4),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: RichText(
                                       text: TextSpan(
                                         text: 'Đã có tài khoản! ',
-                                        style: const TextStyle(
+                                        style:   TextStyle(
                                           color: Color(0xFFA9DED8),
                                         ),
                                         children: [
                                           TextSpan(
                                             text: 'Đăng Nhập',
-                                            style: const TextStyle(
+                                            style:   TextStyle(
                                               color: Colors.redAccent,
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
@@ -313,7 +313,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                   margin: EdgeInsets.only(bottom: _width * .07),
                                   height: _width * .7,
                                   width: _width * .7,
-                                  decoration: const BoxDecoration(
+                                  decoration:   BoxDecoration(
                                     shape: BoxShape.circle,
                                     gradient: LinearGradient(
                                       colors: [
@@ -343,7 +343,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                             Color(0xFFA0DED8).withOpacity(.5),
                                         shape: BoxShape.circle,
                                       ),
-                                      child: const Text(
+                                      child:   Text(
                                         'ĐĂNG KÝ',
                                         style: TextStyle(
                                           color: Colors.black,
@@ -409,7 +409,6 @@ class _SignUpScreenState extends State<SignUpScreen>
 }
 
 class MyBehavior extends ScrollBehavior {
-  @override
   Widget buildViewportChrome(
       BuildContext context, Widget child, AxisDirection axisDirection) {
     return child;

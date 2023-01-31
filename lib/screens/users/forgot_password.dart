@@ -5,7 +5,7 @@ import 'package:project_quizz/provider/utils.dart';
 import 'package:project_quizz/main.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+    ForgotPasswordScreen({super.key});
 
   @override
   State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
@@ -52,7 +52,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
     return Container(
-      decoration: const BoxDecoration(
+      decoration:   BoxDecoration(
           gradient: LinearGradient(
               colors: [
             Color(0xFF09031D),
@@ -80,7 +80,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                   height: _height,
                   child: Column(
                     children: [
-                      const Expanded(child: SizedBox()),
+                        Expanded(child: SizedBox()),
 
                       //text-field
                       Expanded(
@@ -88,8 +88,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const SizedBox(),
-                            const Text(
+                              SizedBox(),
+                              Text(
                               'NHẬP EMAIL ĐỂ ĐẶT LẠI MẬT KHẨU CỦA BẠN!',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -97,7 +97,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                                   fontWeight: FontWeight.w600,
                                   color: Color(0xFFA9DED8)),
                             ),
-                            const SizedBox(),
+                              SizedBox(),
 
                             //email textfield
                             Container(
@@ -105,7 +105,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                               alignment: Alignment.center,
                               padding: EdgeInsets.only(right: _width / 30),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF09031D).withOpacity(.8),
+                                color:   Color(0xFF09031D).withOpacity(.8),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               child: TextFormField(
@@ -148,7 +148,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                                 margin: EdgeInsets.only(bottom: _width * .07),
                                 height: _width * .7,
                                 width: _width * .7,
-                                decoration: const BoxDecoration(
+                                decoration:   BoxDecoration(
                                   shape: BoxShape.circle,
                                   gradient: LinearGradient(
                                     colors: [
@@ -177,7 +177,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                                         color:
                                             Color(0xFFA0DED8).withOpacity(.5),
                                         shape: BoxShape.circle),
-                                    child: const Text(
+                                    child:   Text(
                                       'XÁC NHẬN',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -226,7 +226,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
 }
 
 class MyBehavior extends ScrollBehavior {
-  @override
   Widget buildViewportChrome(
       BuildContext context, Widget child, AxisDirection axisDirection) {
     return child;

@@ -51,6 +51,7 @@ dependencies:
   intl: ^0.17.0
   animated_button: ^0.2.0
   flutter_staggered_animations: ^1.1.1
+  flutter_gradient_colors: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -95,6 +96,7 @@ flutter:
     - assets/gif/sinhhoc.gif
     - assets/gif/tienganh.gif
     - assets/gif/dialy.gif
+    - assets/gif/congratulations.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

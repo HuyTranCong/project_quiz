@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RankScreen extends StatefulWidget {
-  const RankScreen({super.key});
+   RankScreen({super.key});
 
   @override
   State<RankScreen> createState() => _RankScreenState();
@@ -11,7 +11,7 @@ class _RankScreenState extends State<RankScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration:  BoxDecoration(
           gradient: LinearGradient(
               colors: [
             Color(0xFF09031D),

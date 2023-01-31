@@ -6,7 +6,7 @@ import 'package:project_quizz/provider/utils.dart';
 import 'package:project_quizz/screens/onboarding/onboarding.dart';
 
 class VerifyEmailPage extends StatefulWidget {
-  const VerifyEmailPage({super.key});
+    VerifyEmailPage({super.key});
 
   @override
   State<VerifyEmailPage> createState() => _VerifyEmailPageState();
@@ -28,7 +28,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       sendVerificationEmail();
 
       timer = Timer.periodic(
-        const Duration(seconds: 3),
+          Duration(seconds: 3),
         (_) => checkEmailVerified(),
       );
     }
@@ -56,7 +56,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       await user.sendEmailVerification();
 
       setState(() => canResendEmail = false);
-      await Future.delayed(const Duration(seconds: 5));
+      await Future.delayed(  Duration(seconds: 5));
       setState(() => canResendEmail = true);
     } catch (e) {
       Utils.showSnackBar(e.toString());
@@ -64,7 +64,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
   }
 
   void _startTimer() {
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(  Duration(seconds: 1), (timer) {
       setState(() {
         if (_countdownTime > 0) {
           _countdownTime--;
@@ -85,7 +85,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
             title: Text('Verify Email'),
           ),
           body: Container(
-            decoration: const BoxDecoration(
+            decoration:   BoxDecoration(
                 gradient: LinearGradient(
                     colors: [
                   Color(0xFF1B1E44),
@@ -95,21 +95,21 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                     end: Alignment.topCenter,
                     tileMode: TileMode.clamp)),
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding:   EdgeInsets.all(16),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                    Text(
                     'Một mã xác minh đã được gửi đến Email của bạn!',
                     style: TextStyle(fontSize: 20, color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 24),
+                    SizedBox(height: 24),
                   ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                          minimumSize: const Size.fromHeight(50)),
-                      icon: const Icon(Icons.email, size: 32),
-                      label: const Text('Gửi lại mã',
+                          minimumSize:   Size.fromHeight(50)),
+                      icon:   Icon(Icons.email, size: 32),
+                      label:   Text('Gửi lại mã',
                           style: TextStyle(fontSize: 24)),
                       onPressed: canResendEmail ? sendVerificationEmail : null),
                   Text(
@@ -119,11 +119,11 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                       fontSize: 30,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                    SizedBox(height: 16),
                   TextButton(
                     style: ElevatedButton.styleFrom(
-                        minimumSize: const Size.fromHeight(50)),
-                    child: const Text('Huỷ', style: TextStyle(fontSize: 24)),
+                        minimumSize:   Size.fromHeight(50)),
+                    child:   Text('Huỷ', style: TextStyle(fontSize: 24)),
                     onPressed: () => FirebaseAuth.instance.signOut(),
                   ),
                 ],

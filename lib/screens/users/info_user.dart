@@ -3,8 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project_quizz/main.dart';
-import 'package:project_quizz/provider/auth_page.dart';
 import 'package:project_quizz/screens/users/change_password.dart';
 
 class InfoUserScreen extends StatefulWidget {
@@ -45,7 +43,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
     getId();
     Size size = MediaQuery.of(context).size;
     return Container(
-      decoration: const BoxDecoration(
+      decoration:   BoxDecoration(
           gradient: LinearGradient(
               colors: [
             Color(0xFF09031D),
@@ -56,12 +54,12 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
               tileMode: TileMode.clamp)),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Hồ Sơ',
+          title:   Text('Hồ Sơ',
               style: TextStyle(color: Colors.white, fontSize: 30)),
           centerTitle: true,
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
-          iconTheme: const IconThemeData(color: Colors.white),
+          iconTheme:   IconThemeData(color: Colors.white),
         ),
         // extendBodyBehindAppBar: true,
         backgroundColor: Colors.transparent,
@@ -76,7 +74,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
 
             //info
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding:   EdgeInsets.symmetric(horizontal: 20.0),
               child: SizedBox(
                 width: size.width,
                 height: size.height / 2,
@@ -90,12 +88,12 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                         iconColor: Colors.white,
                         textColor: Colors.white,
                         leading:
-                            const Icon(Icons.account_circle_outlined, size: 40),
+                              Icon(Icons.account_circle_outlined, size: 40),
                         title: Text(
                           '$name',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontSize: 20),
+                          style:   TextStyle(fontSize: 20),
                         ),
                         trailing: Icon(Icons.arrow_circle_right_outlined),
                         onTap: () {
@@ -117,7 +115,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                           user.email!,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontSize: 20),
+                          style:   TextStyle(fontSize: 20),
                         ),
                         onTap: () {},
                       ),
@@ -127,7 +125,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        const Text(
+                          Text(
                           'Level',
                           style: TextStyle(
                             color: Colors.white,
@@ -159,7 +157,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                               child: Center(
                                 child: Text(
                                   (exp ~/ 100).toString(),
-                                  style: const TextStyle(
+                                  style:   TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                     fontSize: 20,
@@ -180,7 +178,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                         iconColor: Colors.white,
                         textColor: Colors.white,
                         leading: Icon(Icons.attach_money_outlined, size: 40),
-                        title: const Text(
+                        title:   Text(
                           '1000',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -195,43 +193,44 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                     AnimatedButton(
                       color: Colors.red,
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text('Are you sure?'),
-                              content: const Text('Do you want to Sign Out?'),
-                              actions: <Widget>[
-                                ElevatedButton(
-                                  onPressed: () {
-                                    FirebaseAuth.instance.signOut();
+                        FirebaseAuth.instance.signOut();
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (BuildContext context) {
+                        //     return AlertDialog(
+                        //       title:   Text('Are you sure?'),
+                        //       content:   Text('Do you want to Sign Out?'),
+                        //       actions: <Widget>[
+                        //         ElevatedButton(
+                        //           onPressed: () {
+                        //             FirebaseAuth.instance.signOut();
 
-                                    navigatorKey.currentState
-                                        ?.pushAndRemoveUntil(
-                                            MaterialPageRoute(
-                                              builder: (context) => AuthPage(),
-                                            ),
-                                            (route) => false);
-                                  },
-                                  child: const Text('Yes'),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  style: const ButtonStyle(
-                                    backgroundColor: MaterialStatePropertyAll(
-                                      Colors.red,
-                                    ),
-                                  ),
-                                  child: const Text('No'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                        //             // navigatorKey.currentState
+                        //             //     ?.pushAndRemoveUntil(
+                        //             //         MaterialPageRoute(
+                        //             //           builder: (context) => AuthPage(),
+                        //             //         ),
+                        //             //         (route) => false);
+                        //           },
+                        //           child:   Text('Yes'),
+                        //         ),
+                        //         ElevatedButton(
+                        //           onPressed: () {
+                        //             Navigator.of(context).pop();
+                        //           },
+                        //           style:   ButtonStyle(
+                        //             backgroundColor: MaterialStatePropertyAll(
+                        //               Colors.red,
+                        //             ),
+                        //           ),
+                        //           child:   Text('No'),
+                        //         ),
+                        //       ],
+                        //     );
+                        //   },
+                        // );
                       },
-                      child: const Text(
+                      child:   Text(
                         'Đăng Xuất',
                         style: TextStyle(
                           color: Colors.white,

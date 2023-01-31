@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
-  const ChangePasswordScreen({super.key});
+    ChangePasswordScreen({super.key});
 
   @override
   State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
@@ -23,7 +23,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      decoration: const BoxDecoration(
+      decoration:   BoxDecoration(
           gradient: LinearGradient(
               colors: [
             Color(0xFF09031D),
@@ -34,12 +34,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               tileMode: TileMode.clamp)),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Hồ Sơ',
+          title:   Text('Hồ Sơ',
               style: TextStyle(color: Colors.white, fontSize: 30)),
           centerTitle: true,
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
-          iconTheme: const IconThemeData(color: Colors.white),
+          iconTheme:   IconThemeData(color: Colors.white),
         ),
         // extendBodyBehindAppBar: true,
         backgroundColor: Colors.transparent,
@@ -52,7 +52,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               fit: BoxFit.cover,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding:   EdgeInsets.symmetric(horizontal: 20.0),
               child: SizedBox(
                 width: size.width,
                 height: size.height / 2,
@@ -69,7 +69,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         alignment: Alignment.center,
                         padding: EdgeInsets.only(right: size.width / 30),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF09031D).withOpacity(.8),
+                          color:   Color(0xFF09031D).withOpacity(.8),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: TextFormField(
@@ -109,7 +109,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       AnimatedButton(
                         color: Colors.red,
                         onPressed: () {},
-                        child: const Text(
+                        child:   Text(
                           'Cập Nhật',
                           style: TextStyle(
                             color: Colors.white,
