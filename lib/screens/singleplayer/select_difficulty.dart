@@ -2,7 +2,7 @@ import 'package:animated_button/animated_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:project_quizz/models/question.dart';
-import 'package:project_quizz/screens/singleplayer/playgame.dart';
+import 'package:project_quizz/screens/singleplayer/playgame_single.dart';
 
 class DifficultyScreen extends StatefulWidget {
     DifficultyScreen({Key? key, required this.topic}) : super(key: key);

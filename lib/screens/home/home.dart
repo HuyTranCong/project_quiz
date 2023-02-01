@@ -9,7 +9,9 @@ import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:project_quizz/components/menu.dart';
-import 'package:project_quizz/screens/rank/rank.dart';
+import 'package:project_quizz/screens/home/history.dart';
+import 'package:project_quizz/screens/home/ranking.dart';
+import 'package:project_quizz/screens/multiplayer/multiplayer_wait.dart';
 import 'package:project_quizz/screens/singleplayer/singleplayer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -173,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 AnimatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => RankScreen(),
+                      builder: (context) => MultiplayerScreen(),
                     ));
                   },
                   child: Text(
@@ -188,7 +190,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 //lichsu
                 AnimatedButton(
                   color: Colors.orange,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => HistoryScreen(),
+                    ));
+                  },
                   child: Text(
                     'Lịch Sử Chơi',
                     style: TextStyle(
@@ -201,7 +207,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 //bxh
                 AnimatedButton(
                   color: Colors.orange,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => RankingScreen(),
+                    ));
+                  },
                   child: Text(
                     'Bảng Xếp Hạng',
                     style: TextStyle(
@@ -220,29 +230,34 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: Text('Are you sure?'),
-                          content: Text('Do you want to Exit Game?'),
+                          title: Text('Thoát Trò Chơi'),
+                          content: Text('Bạn có chắc muốn thoát Trò Chơi?'),
                           actions: <Widget>[
-                            ElevatedButton(
-                              onPressed: () {
-                                if (Platform.isAndroid) {
-                                  SystemNavigator.pop();
-                                } else {
-                                  exit(0);
-                                }
-                              },
-                              child: Text('Yes'),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStatePropertyAll(
-                                  Colors.red,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(
+                                      Colors.red,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    if (Platform.isAndroid) {
+                                      SystemNavigator.pop();
+                                    } else {
+                                      exit(0);
+                                    }
+                                  },
+                                  child: Text('Có'),
                                 ),
-                              ),
-                              child: Text('No'),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('Không'),
+                                ),
+                              ],
                             ),
                           ],
                         );
@@ -258,6 +273,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
+
+                
               ],
             ),
           ),

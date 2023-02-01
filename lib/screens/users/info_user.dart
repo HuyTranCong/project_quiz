@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:project_quizz/provider/auth_page.dart';
 import 'package:project_quizz/screens/users/change_password.dart';
 
 class InfoUserScreen extends StatefulWidget {
@@ -14,10 +15,12 @@ class InfoUserScreen extends StatefulWidget {
 
 class _InfoUserScreenState extends State<InfoUserScreen> {
   final fabKey = GlobalKey<FabCircularMenuState>();
+
   final auth = FirebaseAuth.instance;
   final user = FirebaseAuth.instance.currentUser!;
   String? name;
   int exp = 0;
+
   Future getId() async {
     await FirebaseFirestore.instance
         .collection('users')
@@ -39,11 +42,29 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    auth.authStateChanges().listen((user) {
+      if (user == null) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => AuthPage()),
+            (route) => false);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     getId();
     Size size = MediaQuery.of(context).size;
     return Container(
-      decoration:   BoxDecoration(
+      decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: [
             Color(0xFF09031D),
@@ -54,12 +75,12 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
               tileMode: TileMode.clamp)),
       child: Scaffold(
         appBar: AppBar(
-          title:   Text('Hồ Sơ',
+          title: Text('Hồ Sơ',
               style: TextStyle(color: Colors.white, fontSize: 30)),
           centerTitle: true,
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
-          iconTheme:   IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(color: Colors.white),
         ),
         // extendBodyBehindAppBar: true,
         backgroundColor: Colors.transparent,
@@ -74,7 +95,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
 
             //info
             Padding(
-              padding:   EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: SizedBox(
                 width: size.width,
                 height: size.height / 2,
@@ -87,13 +108,12 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                         tileColor: Colors.purple.withOpacity(.2),
                         iconColor: Colors.white,
                         textColor: Colors.white,
-                        leading:
-                              Icon(Icons.account_circle_outlined, size: 40),
+                        leading: Icon(Icons.account_circle_outlined, size: 40),
                         title: Text(
                           '$name',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style:   TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 20),
                         ),
                         trailing: Icon(Icons.arrow_circle_right_outlined),
                         onTap: () {
@@ -115,7 +135,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                           user.email!,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style:   TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 20),
                         ),
                         onTap: () {},
                       ),
@@ -125,7 +145,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                          Text(
+                        Text(
                           'Level',
                           style: TextStyle(
                             color: Colors.white,
@@ -157,7 +177,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                               child: Center(
                                 child: Text(
                                   (exp ~/ 100).toString(),
-                                  style:   TextStyle(
+                                  style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                     fontSize: 20,
@@ -178,7 +198,7 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                         iconColor: Colors.white,
                         textColor: Colors.white,
                         leading: Icon(Icons.attach_money_outlined, size: 40),
-                        title:   Text(
+                        title: Text(
                           '1000',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -190,47 +210,57 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                     ),
 
                     //dang xuat
+                    // IconButton(
+                    //   onPressed: () async {
+                    //     await auth.signOut();
+                    //   },
+                    //   icon: Icon(
+                    //     Icons.exit_to_app_outlined,
+                    //     size: 30,
+                    //     color: Colors.white,
+                    //   ),
+                    // ),
                     AnimatedButton(
                       color: Colors.red,
                       onPressed: () {
-                        FirebaseAuth.instance.signOut();
-                        // showDialog(
-                        //   context: context,
-                        //   builder: (BuildContext context) {
-                        //     return AlertDialog(
-                        //       title:   Text('Are you sure?'),
-                        //       content:   Text('Do you want to Sign Out?'),
-                        //       actions: <Widget>[
-                        //         ElevatedButton(
-                        //           onPressed: () {
-                        //             FirebaseAuth.instance.signOut();
-
-                        //             // navigatorKey.currentState
-                        //             //     ?.pushAndRemoveUntil(
-                        //             //         MaterialPageRoute(
-                        //             //           builder: (context) => AuthPage(),
-                        //             //         ),
-                        //             //         (route) => false);
-                        //           },
-                        //           child:   Text('Yes'),
-                        //         ),
-                        //         ElevatedButton(
-                        //           onPressed: () {
-                        //             Navigator.of(context).pop();
-                        //           },
-                        //           style:   ButtonStyle(
-                        //             backgroundColor: MaterialStatePropertyAll(
-                        //               Colors.red,
-                        //             ),
-                        //           ),
-                        //           child:   Text('No'),
-                        //         ),
-                        //       ],
-                        //     );
-                        //   },
-                        // );
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Đăng Xuất'),
+                              content: Text('Bạn có chắc muốn Đăng Xuất?'),
+                              actions: <Widget>[
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () async {
+                                        await auth.signOut();
+                                        
+                                      },
+                                      child: Text('Có'),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStatePropertyAll(
+                                          Colors.red,
+                                        ),
+                                      ),
+                                      child: Text('Không'),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       },
-                      child:   Text(
+                      child: Text(
                         'Đăng Xuất',
                         style: TextStyle(
                           color: Colors.white,
