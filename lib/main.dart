@@ -15,7 +15,9 @@ Future main() async {
   await Firebase.initializeApp();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
-    runApp(MyApp());
+    runApp(
+      MyApp(),
+    );
   });
 }
 

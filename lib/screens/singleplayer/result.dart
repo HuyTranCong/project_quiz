@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project_quizz/models/question.dart';
+import 'package:project_quizz/screens/home/home.dart';
 import 'package:project_quizz/screens/singleplayer/playgame.dart';
 import 'package:project_quizz/screens/singleplayer/singleplayer.dart';
 
@@ -128,6 +129,7 @@ class _ResultScreenState extends State<ResultScreen> {
                 style: TextStyle(color: Colors.yellow, fontSize: 50),
               ),
               Spacer(),
+
               //button
               AnimatedButton(
                 onPressed: () {
@@ -148,6 +150,19 @@ class _ResultScreenState extends State<ResultScreen> {
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => SinglePlayerScreen(),
+                  ));
+                },
+                child: Text('Chủ Đề Khác',
+                    style: TextStyle(fontSize: 20, color: Colors.white)),
+              ),
+
+              SizedBox(height: 20.0),
+
+              AnimatedButton(
+                color: Colors.brown,
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => HomeScreen(),
                   ));
                 },
                 child: Text('Trang Chủ',

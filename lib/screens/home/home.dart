@@ -9,7 +9,8 @@ import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:project_quizz/components/menu.dart';
-import 'package:project_quizz/screens/rank/rank.dart';
+import 'package:project_quizz/screens/home/history.dart';
+import 'package:project_quizz/screens/multiplayer/multiplayer.dart';
 import 'package:project_quizz/screens/singleplayer/singleplayer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -173,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 AnimatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => RankScreen(),
+                      builder: (context) => MultiplayerScreen(),
                     ));
                   },
                   child: Text(
@@ -188,7 +189,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 //lichsu
                 AnimatedButton(
                   color: Colors.orange,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => RankingScreen(),
+                    ));
+                  },
                   child: Text(
                     'Lịch Sử Chơi',
                     style: TextStyle(
