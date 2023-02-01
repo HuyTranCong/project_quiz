@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project_quizz/main.dart';
 import 'package:project_quizz/provider/auth_page.dart';
 import 'package:project_quizz/screens/users/change_password.dart';
-import 'package:restart_app/restart_app.dart';
 
 class InfoUserScreen extends StatefulWidget {
   InfoUserScreen({super.key});
@@ -204,30 +203,39 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                               title: Text('Đăng Xuất'),
                               content: Text('Bạn có chắc muốn Đăng Xuất?'),
                               actions: <Widget>[
-                                ElevatedButton(
-                                  onPressed: () {
-                                    FirebaseAuth.instance.signOut();
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        FirebaseAuth.instance.signOut();
 
-                                    navigatorKey.currentState
-                                        ?.pushAndRemoveUntil(
-                                            MaterialPageRoute(
-                                              builder: (context) => AuthPage(),
-                                            ),
-                                            (route) => false);
-                                    Restart.restartApp();
-                                  },
-                                  child: Text('Có'),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStatePropertyAll(
-                                      Colors.red,
+                                        navigatorKey.currentState
+                                            ?.pushAndRemoveUntil(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AuthPage(),
+                                                ),
+                                                (route) => false);
+
+                                        // Restart.restartApp();
+                                      },
+                                      child: Text('Có'),
                                     ),
-                                  ),
-                                  child: Text('Không'),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStatePropertyAll(
+                                          Colors.red,
+                                        ),
+                                      ),
+                                      child: Text('Không'),
+                                    ),
+                                  ],
                                 ),
                               ],
                             );

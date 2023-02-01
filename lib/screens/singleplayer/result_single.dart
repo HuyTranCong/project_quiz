@@ -4,11 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project_quizz/models/question.dart';
 import 'package:project_quizz/screens/home/home.dart';
-import 'package:project_quizz/screens/singleplayer/playgame.dart';
+import 'package:project_quizz/screens/singleplayer/playgame_single.dart';
 import 'package:project_quizz/screens/singleplayer/singleplayer.dart';
 
-class ResultScreen extends StatefulWidget {
-  ResultScreen(
+class ResultSingleScreen extends StatefulWidget {
+  ResultSingleScreen(
       {super.key,
       required this.score,
       required this.questions,
@@ -18,10 +18,10 @@ class ResultScreen extends StatefulWidget {
   final int totalTime;
 
   @override
-  State<ResultScreen> createState() => _ResultScreenState();
+  State<ResultSingleScreen> createState() => _ResultSingleScreenState();
 }
 
-class _ResultScreenState extends State<ResultScreen> {
+class _ResultSingleScreenState extends State<ResultSingleScreen> {
   Future _updateHightScore() async {
     final AuthUser = FirebaseAuth.instance.currentUser;
 
@@ -131,29 +131,31 @@ class _ResultScreenState extends State<ResultScreen> {
               Spacer(),
 
               //button
-              AnimatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => PlayGameScreen(
-                      totalTime: widget.totalTime,
-                      questions: widget.questions,
-                    ),
-                  ));
-                },
-                child: Text('Chơi lại', style: TextStyle(fontSize: 20)),
-              ),
-
-              SizedBox(height: 20.0),
-
-              AnimatedButton(
-                color: Colors.red,
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => SinglePlayerScreen(),
-                  ));
-                },
-                child: Text('Chủ Đề Khác',
-                    style: TextStyle(fontSize: 20, color: Colors.white)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  AnimatedButton(
+                    color: Colors.red,
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => SinglePlayerScreen(),
+                      ));
+                    },
+                    child: Text('Chủ Đề Khác',
+                        style: TextStyle(fontSize: 20, color: Colors.white)),
+                  ),
+                  AnimatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => PlayGameScreen(
+                          totalTime: widget.totalTime,
+                          questions: widget.questions,
+                        ),
+                      ));
+                    },
+                    child: Text('Chơi lại', style: TextStyle(fontSize: 20)),
+                  ),
+                ],
               ),
 
               SizedBox(height: 20.0),

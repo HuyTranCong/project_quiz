@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project_quizz/components/action_button.dart';
 import 'package:project_quizz/models/question.dart';
+import 'package:project_quizz/screens/multiplayer/playgame_multi.dart';
 
 class MultiplayerScreen extends StatefulWidget {
   MultiplayerScreen({super.key});
@@ -30,6 +32,40 @@ class _MultiplayerScreenState extends State<MultiplayerScreen> {
           time++;
         });
         await getMatch();
+      }
+      if (isHas) {
+        Navigator.pop(context);
+        lengthQuestion().then((value) async {
+          await firestore
+              .collection('questions')
+              .where('id',
+                  isGreaterThanOrEqualTo: (Random().nextDouble() * 1).floor())
+              .limit(90)
+              .get()
+              .then((value) {
+            final questionDocs = value.docs;
+
+            lsQuestion = questionDocs
+                .map((e) => Question.fromQueryDocumentSnapshot(e))
+                .toList();
+          }).then((value) {
+            FirebaseFirestore.instance
+                .collection('config')
+                .doc('totalBattle')
+                .get()
+                .then((value) => Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BattleScreen(
+                        counter: count,
+                        questions: lsQuestion,
+                        totalTime: value.get('key'),
+                      ),
+                    ),
+                    (route) => false));
+          });
+        });
+        timer.cancel();
       }
     });
   }
@@ -198,7 +234,8 @@ class _MultiplayerScreenState extends State<MultiplayerScreen> {
             isHas
                 ? Column(
                     children: [
-                      Image.asset('assets/timer.gif', width: size.width / 2),
+                      Image.asset('assets/gif/timer.gif',
+                          width: size.width / 2),
                       SizedBox(height: 10),
                     ],
                   )
@@ -287,7 +324,7 @@ class _MultiplayerScreenState extends State<MultiplayerScreen> {
                                                 AlignmentDirectional.center,
                                             padding: EdgeInsets.all(10.0),
                                             child: Text(
-                                              'Đang tìm đối thủ không xứng tầm.......',
+                                              'Đang tìm đối thủ xứng tầm.......',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   color: Colors.white,

@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:project_quizz/components/menu.dart';
 import 'package:project_quizz/screens/home/history.dart';
-import 'package:project_quizz/screens/multiplayer/multiplayer.dart';
+import 'package:project_quizz/screens/multiplayer/multiplayer_wait.dart';
 import 'package:project_quizz/screens/singleplayer/singleplayer.dart';
 
 class HomeScreen extends StatefulWidget {

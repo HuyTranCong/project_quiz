@@ -5,7 +5,7 @@ import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:project_quizz/components/answer_tile.dart';
 import 'package:project_quizz/models/question.dart';
 import 'package:project_quizz/screens/home/home.dart';
-import 'package:project_quizz/screens/singleplayer/result.dart';
+import 'package:project_quizz/screens/singleplayer/result_single.dart';
 
 class PlayGameScreen extends StatefulWidget {
   PlayGameScreen({
@@ -20,8 +20,8 @@ class PlayGameScreen extends StatefulWidget {
 }
 
 class _PlayGameScreenState extends State<PlayGameScreen> {
-  late int currentTime;
-  late Timer timer;
+  late int _currentTime;
+  late Timer _timer;
 
   int _currentIndex = 0;
   int _score = 0;
@@ -35,31 +35,31 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
     super.initState();
 
     //
-    currentTime = widget.totalTime;
+    _currentTime = widget.totalTime;
 
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      print(currentTime);
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      print(_currentTime);
       if (mounted)
         setState(() {
-          currentTime -= 1;
+          _currentTime -= 1;
         });
-      if (currentTime == 0) {
-        timer.cancel();
+      if (_currentTime == 0) {
+        _timer.cancel();
 
         pushResultScreen(context);
       }
     });
   }
 
-  void runtimer() {
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      print(currentTime);
+  void run_timer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (_timer) {
+      print(_currentTime);
       if (mounted)
         setState(() {
-          currentTime -= 1;
+          _currentTime -= 1;
         });
-      if (currentTime == 0) {
-        timer.cancel();
+      if (_currentTime == 0) {
+        _timer.cancel();
 
         pushResultScreen(context);
       }
@@ -68,14 +68,14 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
 
   @override
   void dispose() {
-    timer.cancel();
+    _timer.cancel();
     super.dispose();
   }
 
   void pushResultScreen(BuildContext context) {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => ResultScreen(
+        builder: (context) => ResultSingleScreen(
             score: _score,
             questions: widget.questions,
             totalTime: widget.totalTime),
@@ -115,16 +115,16 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
                       fit: StackFit.expand,
                       children: [
                         LinearProgressIndicator(
-                          value: currentTime / widget.totalTime,
-                          color: timer.tick >= currentTime * 3.5
-                              ? Colors.redAccent
-                              : timer.tick >= currentTime * 1
-                                  ? Colors.yellow
+                          value: _currentTime / widget.totalTime,
+                          color: _timer.tick >= _currentTime * 3.5
+                              ? Colors.red
+                              : _timer.tick >= _currentTime * 1
+                                  ? Colors.yellowAccent
                                   : Colors.green,
                         ),
                         Center(
                           child: Text(
-                            currentTime.toString(),
+                            _currentTime.toString(),
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -232,7 +232,7 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
                                   Colors.purple),
                             ),
                             onPressed: () async {
-                              timer.cancel();
+                              _timer.cancel();
                               isCall = false;
                               showDialog(
                                 context: context,
@@ -245,7 +245,7 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
                                       ElevatedButton(
                                         onPressed: () {
                                           Navigator.of(context).pop();
-                                          runtimer();
+                                          run_timer();
                                         },
                                         child: Text('Cám Ơn!'),
                                       ),
@@ -275,7 +275,7 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
                                 }
                               });
                               isHelp = false;
-                              timer.cancel();
+                              _timer.cancel();
                               return showDialog(
                                 barrierDismissible: false,
                                 context: context,
@@ -297,7 +297,7 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
                                       ElevatedButton(
                                         onPressed: () {
                                           Navigator.of(context).pop();
-                                          runtimer();
+                                          run_timer();
                                         },
                                         child: Text('Cám Ơn!'),
                                       ),
@@ -318,7 +318,7 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
                             MaterialStatePropertyAll<Color>(Colors.red),
                       ),
                       onPressed: () {
-                        timer.cancel();
+                        _timer.cancel();
                         showDialog(
                           context: context,
                           builder: (context) {
@@ -350,7 +350,7 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
                                     ElevatedButton(
                                       onPressed: () {
                                         Navigator.of(context).pop();
-                                        runtimer();
+                                        run_timer();
                                       },
                                       child: Text('Có'),
                                     ),
