@@ -92,6 +92,7 @@ class _ResultMultiScreenState extends State<ResultMultiScreen> {
 
               //button
               AnimatedButton(
+                color: Colors.red,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => MultiplayerScreen(),
@@ -102,7 +103,7 @@ class _ResultMultiScreenState extends State<ResultMultiScreen> {
               ),
               SizedBox(height: 20.0),
               AnimatedButton(
-                color: Colors.brown,
+                color: Colors.indigo,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => HomeScreen(),

@@ -40,7 +40,7 @@ class _MultiplayerScreenState extends State<MultiplayerScreen> {
               .collection('questions')
               .where('id',
                   isGreaterThanOrEqualTo: (Random().nextDouble() * 1).floor())
-              .limit(90)
+              .limit(100)
               .get()
               .then((value) {
             final questionDocs = value.docs;

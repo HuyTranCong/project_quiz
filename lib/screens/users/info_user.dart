@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project_quizz/main.dart';
 import 'package:project_quizz/provider/auth_page.dart';
 import 'package:project_quizz/screens/users/change_password.dart';
 
@@ -16,10 +15,12 @@ class InfoUserScreen extends StatefulWidget {
 
 class _InfoUserScreenState extends State<InfoUserScreen> {
   final fabKey = GlobalKey<FabCircularMenuState>();
+
   final auth = FirebaseAuth.instance;
   final user = FirebaseAuth.instance.currentUser!;
   String? name;
   int exp = 0;
+
   Future getId() async {
     await FirebaseFirestore.instance
         .collection('users')
@@ -38,6 +39,24 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
             }
           }),
         );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    auth.authStateChanges().listen((user) {
+      if (user == null) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => AuthPage()),
+            (route) => false);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -191,11 +210,19 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                     ),
 
                     //dang xuat
+                    // IconButton(
+                    //   onPressed: () async {
+                    //     await auth.signOut();
+                    //   },
+                    //   icon: Icon(
+                    //     Icons.exit_to_app_outlined,
+                    //     size: 30,
+                    //     color: Colors.white,
+                    //   ),
+                    // ),
                     AnimatedButton(
                       color: Colors.red,
                       onPressed: () {
-                        // FirebaseAuth.instance.signOut();
-
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -208,18 +235,9 @@ class _InfoUserScreenState extends State<InfoUserScreen> {
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     ElevatedButton(
-                                      onPressed: () {
-                                        FirebaseAuth.instance.signOut();
-
-                                        navigatorKey.currentState
-                                            ?.pushAndRemoveUntil(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      AuthPage(),
-                                                ),
-                                                (route) => false);
-
-                                        // Restart.restartApp();
+                                      onPressed: () async {
+                                        await auth.signOut();
+                                        
                                       },
                                       child: Text('Có'),
                                     ),

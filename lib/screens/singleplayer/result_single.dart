@@ -161,7 +161,7 @@ class _ResultSingleScreenState extends State<ResultSingleScreen> {
               SizedBox(height: 20.0),
 
               AnimatedButton(
-                color: Colors.brown,
+                color: Colors.indigo,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => HomeScreen(),

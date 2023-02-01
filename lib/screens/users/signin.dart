@@ -9,7 +9,7 @@ import 'package:project_quizz/screens/users/forgot_password.dart';
 
 class SignInScreen extends StatefulWidget {
   final VoidCallback onClickedSignUp;
-    SignInScreen({super.key, required this.onClickedSignUp});
+  SignInScreen({super.key, required this.onClickedSignUp});
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -69,7 +69,7 @@ class _SignInScreenState extends State<SignInScreen>
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
     return Container(
-      decoration:   BoxDecoration(
+      decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: [
             Color(0xFF09031D),
@@ -89,7 +89,7 @@ class _SignInScreenState extends State<SignInScreen>
                   height: _height,
                   child: Column(
                     children: [
-                        Expanded(child: SizedBox()),
+                      Expanded(child: SizedBox()),
                       //text-field
                       Form(
                         key: formKey,
@@ -99,15 +99,15 @@ class _SignInScreenState extends State<SignInScreen>
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                  SizedBox(),
-                                  Text(
+                                SizedBox(),
+                                Text(
                                   'ĐĂNG NHẬP',
                                   style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.w600,
                                       color: Color(0xFFA9DED8)),
                                 ),
-                                  SizedBox(),
+                                SizedBox(),
 
                                 //email textfield
                                 Container(
@@ -115,8 +115,7 @@ class _SignInScreenState extends State<SignInScreen>
                                   alignment: Alignment.center,
                                   // padding: EdgeInsets.only(right: _width / 30),
                                   decoration: BoxDecoration(
-                                    color:
-                                          Color(0xFF09031D).withOpacity(.8),
+                                    color: Color(0xFF09031D).withOpacity(.8),
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                   child: TextFormField(
@@ -124,7 +123,7 @@ class _SignInScreenState extends State<SignInScreen>
                                     style: TextStyle(
                                         color: Colors.white.withOpacity(.8)),
                                     keyboardType: TextInputType.emailAddress,
-                                    autofillHints:   [AutofillHints.email],
+                                    autofillHints: [AutofillHints.email],
                                     decoration: InputDecoration(
                                       prefixIcon: Icon(Icons.email_outlined,
                                           color: Colors.white.withOpacity(.7)),
@@ -160,8 +159,7 @@ class _SignInScreenState extends State<SignInScreen>
                                   alignment: Alignment.center,
                                   padding: EdgeInsets.only(right: _width / 30),
                                   decoration: BoxDecoration(
-                                    color:
-                                          Color(0xFF09031D).withOpacity(.8),
+                                    color: Color(0xFF09031D).withOpacity(.8),
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                   child: TextFormField(
@@ -169,9 +167,7 @@ class _SignInScreenState extends State<SignInScreen>
                                     style: TextStyle(
                                         color: Colors.white.withOpacity(.8)),
                                     keyboardType: TextInputType.visiblePassword,
-                                    autofillHints:   [
-                                      AutofillHints.password
-                                    ],
+                                    autofillHints: [AutofillHints.password],
                                     onEditingComplete: () =>
                                         TextInput.finishAutofillContext(),
                                     obscureText: !isHidden,
@@ -207,16 +203,16 @@ class _SignInScreenState extends State<SignInScreen>
                                   children: [
                                     //forgotten password
                                     Container(
-                                      padding:   EdgeInsets.all(10),
+                                      padding: EdgeInsets.all(10),
                                       decoration: BoxDecoration(
-                                        color:   Color(0xFF09031D)
-                                            .withOpacity(.4),
+                                        color:
+                                            Color(0xFF09031D).withOpacity(.4),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: RichText(
                                         text: TextSpan(
                                           text: 'Quên mật khẩu?',
-                                          style:   TextStyle(
+                                          style: TextStyle(
                                             color: Color(0xFFA9DED8),
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -237,22 +233,22 @@ class _SignInScreenState extends State<SignInScreen>
 
                                     //create a new account
                                     Container(
-                                      padding:   EdgeInsets.all(10),
+                                      padding: EdgeInsets.all(10),
                                       decoration: BoxDecoration(
-                                        color:   Color(0xFF09031D)
-                                            .withOpacity(.4),
+                                        color:
+                                            Color(0xFF09031D).withOpacity(.4),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: RichText(
                                         text: TextSpan(
                                           text: 'Chưa có tài khoản? ',
-                                          style:   TextStyle(
+                                          style: TextStyle(
                                             color: Color(0xFFA9DED8),
                                           ),
                                           children: [
                                             TextSpan(
                                               text: 'Đăng Ký',
-                                              style:   TextStyle(
+                                              style: TextStyle(
                                                 color: Colors.redAccent,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold,
@@ -283,7 +279,7 @@ class _SignInScreenState extends State<SignInScreen>
                                 margin: EdgeInsets.only(bottom: _width * .07),
                                 height: _width * .7,
                                 width: _width * .7,
-                                decoration:   BoxDecoration(
+                                decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   gradient: LinearGradient(
                                     colors: [
@@ -313,7 +309,7 @@ class _SignInScreenState extends State<SignInScreen>
                                         color:
                                             Color(0xFFA0DED8).withOpacity(.5),
                                         shape: BoxShape.circle),
-                                    child:   Text(
+                                    child: Text(
                                       'ĐĂNG NHẬP',
                                       style: TextStyle(
                                           color: Colors.black,

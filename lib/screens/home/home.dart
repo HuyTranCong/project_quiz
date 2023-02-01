@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:project_quizz/components/menu.dart';
 import 'package:project_quizz/screens/home/history.dart';
+import 'package:project_quizz/screens/home/ranking.dart';
 import 'package:project_quizz/screens/multiplayer/multiplayer_wait.dart';
 import 'package:project_quizz/screens/singleplayer/singleplayer.dart';
 
@@ -191,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   color: Colors.orange,
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => RankingScreen(),
+                      builder: (context) => HistoryScreen(),
                     ));
                   },
                   child: Text(
@@ -206,7 +207,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 //bxh
                 AnimatedButton(
                   color: Colors.orange,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => RankingScreen(),
+                    ));
+                  },
                   child: Text(
                     'Bảng Xếp Hạng',
                     style: TextStyle(
@@ -268,6 +273,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
+
+                
               ],
             ),
           ),
