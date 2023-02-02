@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -7,6 +8,7 @@ class HistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -53,8 +55,8 @@ class HistoryScreen extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 8.0),
                 child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
-                      .collection('users')
-                      .orderBy('score', descending: true)
+                      .collection('history')
+                      .where('email', isEqualTo: user.email)
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
@@ -62,11 +64,11 @@ class HistoryScreen extends StatelessWidget {
                         child: CircularProgressIndicator(),
                       );
                     }
-                    final user = snapshot.data!.docs;
+                    final users = snapshot.data!.docs;
                     return ListView.builder(
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
-                      itemCount: user.length,
+                      itemCount: users.length,
                       itemBuilder: (context, index) {
                         return Container(
                           margin: EdgeInsets.symmetric(vertical: 8.0),
@@ -88,13 +90,13 @@ class HistoryScreen extends StatelessWidget {
                                       BorderSide(width: 1, color: Colors.black),
                                   borderRadius: BorderRadius.circular(30)),
                               title: Text(
-                                user[index]['username'].toString(),
+                                users[index]['username'].toString(),
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
                                     fontWeight: FontWeight.w800),
                               ),
-                              trailing: Text(user[index]['score'].toString(),
+                              trailing: Text(users[index]['score'].toString(),
                                   style: TextStyle(
                                     color: Colors.red,
                                     fontSize: 20,
@@ -102,7 +104,7 @@ class HistoryScreen extends StatelessWidget {
                                   )),
                               subtitle: Text(
                                 DateFormat('kk:mm:ss dd-MM-yyyy  a').format(
-                                    DateTime.parse(user[index]['date']
+                                    DateTime.parse(users[index]['date']
                                         .toDate()
                                         .toString())),
                                 style: TextStyle(color: Colors.white),
