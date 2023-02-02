@@ -1,6 +1,7 @@
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:project_quizz/screens/home/home.dart';
+import 'package:project_quizz/screens/setting/setting.dart';
 import 'package:project_quizz/screens/users/info_user.dart';
 
 class Menu extends StatelessWidget {
@@ -30,10 +31,15 @@ class Menu extends StatelessWidget {
       animationCurve: Curves.easeInOutCirc,
       onDisplayChange: ((isOpen) {}),
       children: <Widget>[
+        //setting
         RawMaterialButton(
           fillColor: Color(0xFF192A56).withOpacity(.8),
           focusColor: Colors.red,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => SettingScreen(),
+            ));
+          },
           shape: CircleBorder(),
           padding: EdgeInsets.all(12.0),
           child: Icon(
@@ -42,6 +48,8 @@ class Menu extends StatelessWidget {
             size: 30,
           ),
         ),
+
+        //shop
         RawMaterialButton(
           fillColor: Color(0xFF192A56).withOpacity(.8),
           focusColor: Colors.red,
@@ -54,6 +62,8 @@ class Menu extends StatelessWidget {
             size: 30,
           ),
         ),
+
+        //info
         RawMaterialButton(
             fillColor: Color(0xFF192A56).withOpacity(.8),
             focusColor: Colors.red,
@@ -70,6 +80,7 @@ class Menu extends StatelessWidget {
               size: 30,
             )),
 
+        //home
         //pushAndRemoveUntil: xoá toàn bộ route và return route mới
         RawMaterialButton(
             fillColor: Color(0xFF192A56).withOpacity(.8),

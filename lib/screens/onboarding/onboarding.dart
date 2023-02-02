@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:project_quizz/components/music.dart';
 import 'package:project_quizz/screens/home/home.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -47,6 +48,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
 
   @override
   Widget build(BuildContext context) {
+    Music.init();
     Size size = MediaQuery.of(context).size;
     return SizedBox(
       height: double.infinity,

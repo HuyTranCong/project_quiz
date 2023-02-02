@@ -38,6 +38,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   animations: ^2.0.7
   fab_circular_menu: ^1.0.2
+  font_awesome_flutter: ^10.3.0
+  animator: ^3.2.0
+  animated_text_kit: ^4.2.2
+  animated_button: ^0.2.0
+  flutter_staggered_animations: ^1.1.1
+  flutter_gradient_colors: ^2.1.1
+  assets_audio_player: ^3.0.6
+  volume_controller: ^2.0.6
 
   # firebase
   firebase_auth: ^4.2.4
@@ -45,14 +53,7 @@ dependencies:
   firebase_core: ^2.4.1
   email_validator: ^2.1.17
   connectivity_plus: ^3.0.2
-  font_awesome_flutter: ^10.3.0
-  animator: ^3.2.0
-  animated_text_kit: ^4.2.2
   intl: ^0.17.0
-  animated_button: ^0.2.0
-  flutter_staggered_animations: ^1.1.1
-  flutter_gradient_colors: ^2.1.1
-  restart_app: ^1.1.2
 
 dev_dependencies:
   flutter_test:
@@ -90,6 +91,7 @@ flutter:
     - assets/images/avatar.png
     - assets/images/avatar1.png
     - assets/images/vs.png
+    - assets/images/voice.png
 
     - assets/gif/toan.gif
     - assets/gif/vatly.gif
@@ -106,6 +108,9 @@ flutter:
     - assets/gif/win.gif
     - assets/gif/tie.gif
     - assets/gif/timer.gif
+
+    - assets/music/quiz.mp3
+    - assets/music/quiz2.mp3
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
